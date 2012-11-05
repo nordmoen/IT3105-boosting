@@ -42,20 +42,27 @@ public class UserInterface {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		List<List<String>> options = parseCommandLine(args);
-		List<String> parsers = new ArrayList<String>();
-		Parser fileParser;
-		for(List<String> option : options){
-			if(option.get(0).equalsIgnoreCase("nbc")){
-				parsers.addAll(parseNBC(option));
-			}else if(option.get(0).equalsIgnoreCase("dtc")){
-				parsers.addAll(parseDTC(option));
-			}else if(option.get(0).equalsIgnoreCase("file")){
-				fileParser = parseFilename(option);
-			}else{
-				System.err.println("Did not recoqnize the option: '" + 
-						option.get(0) + "'");
+		if(args.length > 1 && !args[0].equalsIgnoreCase("--help")){
+			List<List<String>> options = parseCommandLine(args);
+			List<String> parsers = new ArrayList<String>();
+			Parser fileParser;
+			for(List<String> option : options){
+				if(option.get(0).equalsIgnoreCase("nbc")){
+					parsers.addAll(parseNBC(option));
+				}else if(option.get(0).equalsIgnoreCase("dtc")){
+					parsers.addAll(parseDTC(option));
+				}else if(option.get(0).equalsIgnoreCase("file")){
+					fileParser = parseFilename(option);
+				}else{
+					System.err.println("Did not recoqnize the option: '" + 
+							option.get(0) + "'");
+				}
 			}
+		}else{
+			System.out.println("Usage:");
+			System.out.println("java " + UserInterface.class.getName() + 
+					" --filename name filereader --classifier classname [options] " +
+					"[--classifier classname [options]]");
 		}
 	}
 
