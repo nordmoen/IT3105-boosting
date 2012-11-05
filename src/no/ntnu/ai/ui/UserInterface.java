@@ -3,6 +3,8 @@ package no.ntnu.ai.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import no.ntnu.ai.file.parser.Parser;
+
 
 public class UserInterface {
 
@@ -13,7 +15,7 @@ public class UserInterface {
 		return null;
 	}
 
-	public static String parseFilename(List<String> options){
+	public static Parser parseFilename(List<String> options){
 		return null;
 	}
 
@@ -42,7 +44,7 @@ public class UserInterface {
 	public static void main(String[] args) {
 		List<List<String>> options = parseCommandLine(args);
 		List<String> parsers = new ArrayList<String>();
-		String fileParser;
+		Parser fileParser;
 		for(List<String> option : options){
 			if(option.get(0).equalsIgnoreCase("nbc")){
 				parsers.addAll(parseNBC(option));
