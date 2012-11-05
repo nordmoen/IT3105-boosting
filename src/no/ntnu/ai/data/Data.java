@@ -7,6 +7,6 @@ import java.util.List;
  * @author Trond
  *
  */
-public interface Data extends List<DataElement>{
+public interface Data extends List<DataElement<?,?>>{
 //TODO: decide what methods are needed, if any.
 }
