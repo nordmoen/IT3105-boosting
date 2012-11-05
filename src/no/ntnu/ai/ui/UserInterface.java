@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class UserInteface {
+public class UserInterface {
 
 	public static List<String> parseNBC(List<String> options){
 		return null;
