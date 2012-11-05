@@ -2,7 +2,7 @@ package no.ntnu.ai.data;
 
 import java.util.List;
 /**
- * Represents a single instance of Data, which contains any number of features
+ * Represents a single instance of some data, which contains any number of features
  * and a classification of the instance. The features can be of any type as long
  * as they are all of the same type.
  * @author Trond, Jørgen
