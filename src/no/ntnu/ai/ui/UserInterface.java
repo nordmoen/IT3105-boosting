@@ -1,17 +1,21 @@
 package no.ntnu.ai.ui;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import no.ntnu.ai.file.parser.Parser;
 
 
 public class UserInterface {
 
-	public static List<String> parseNBC(List<String> options){
+	public static List<String> parseNBC(List<String> options, Parser parser){
+		assert(parser != null);
 		return null;
 	}
-	public static List<String> parseDTC(List<String> options){
+	public static List<String> parseDTC(List<String> options, Parser parser){
+		assert(parser != null);
 		return null;
 	}
 
@@ -45,14 +49,14 @@ public class UserInterface {
 		if(args.length > 1 && !args[0].equalsIgnoreCase("--help")){
 			List<List<String>> options = parseCommandLine(args);
 			List<String> parsers = new ArrayList<String>();
-			Parser fileParser;
+			Map<String, Parser> fileParsers = new HashMap<String, Parser>();
 			for(List<String> option : options){
 				if(option.get(0).equalsIgnoreCase("nbc")){
-					parsers.addAll(parseNBC(option));
+					parsers.addAll(parseNBC(option, fileParsers.get(option.get(1))));
 				}else if(option.get(0).equalsIgnoreCase("dtc")){
-					parsers.addAll(parseDTC(option));
+					parsers.addAll(parseDTC(option, fileParsers.get(option.get(1))));
 				}else if(option.get(0).equalsIgnoreCase("file")){
-					fileParser = parseFilename(option);
+					fileParsers.put(option.get(1), parseFilename(option));
 				}else{
 					System.err.println("Did not recoqnize the option: '" + 
 							option.get(0) + "'");
@@ -61,8 +65,9 @@ public class UserInterface {
 		}else{
 			System.out.println("Usage:");
 			System.out.println("java " + UserInterface.class.getName() + 
-					" --filename name filereader --classifier classname [options] " +
-					"[--classifier classname [options]]");
+					" --filename filereader name [--filename filereader name]" +
+					" --classifier classname filereader [options] " +
+					"[--classifier classname filereader [options]]");
 		}
 	}
 
