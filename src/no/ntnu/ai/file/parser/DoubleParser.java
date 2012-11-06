@@ -33,12 +33,13 @@ public class DoubleParser extends AbstractParser<Double, Integer> {
 				scan = new Scanner(fis);
 				while(scan.hasNextLine()){
 					String[] line = scan.nextLine().split(",");
-					DataElement<Double, Integer> dataLine = 
-							new ArrayElement<Double, Integer>(
-									Integer.parseInt(line[line.length - 1]));
+					Double[] features = new Double[line.length - 1];
 					for(int i = 0; i < line.length - 1; i++){
-						dataLine.add(Double.parseDouble(line[i]));
+						features[i] = Double.parseDouble(line[i]);
 					}
+					DataElement<Double, Integer> dataLine = 
+							new ArrayElement<Double, Integer>(features, 
+									Integer.parseInt(line[line.length - 1]));
 					this.data.add(dataLine);
 				}
 				fis.close();

@@ -1,5 +1,6 @@
 package no.ntnu.ai.data;
 
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -13,45 +14,21 @@ import java.util.ListIterator;
  * @param <T> - The type of the features
  * @param <T2> - The type of the classification	
  */
-public class ArrayElement<T, T2> implements DataElement<T, T2> {
+public class ArrayElement<T, T2> extends AbstractList<T> implements DataElement<T, T2> {
 	
 	private final ArrayList<T> list = new ArrayList<T>();
 	private final T2 classification;
 	
-	public ArrayElement(T2 classification){
-		this.classification = classification;
-	}
-	
+	/**
+	 * Constructor for ArrayElement
+	 * @param elements - The elements to add in this instance
+	 * @param classif - The classification of this instance
+	 */
 	public ArrayElement(T[] elements, T2 classif){
-		this(classif);
+		this.classification = classif;
 		for(T elem : elements){
 			this.list.add(elem);
 		}
-	}
-
-	@Override
-	public boolean add(T arg0) {
-		return this.list.add(arg0);
-	}
-
-	@Override
-	public void add(int arg0, T arg1) {
-		this.list.add(arg0, arg1);
-	}
-
-	@Override
-	public boolean addAll(Collection<? extends T> arg0) {
-		return this.list.addAll(arg0);
-	}
-
-	@Override
-	public boolean addAll(int arg0, Collection<? extends T> arg1) {
-		return this.list.addAll(arg0, arg1);
-	}
-
-	@Override
-	public void clear() {
-		this.list.clear();
 	}
 
 	@Override
@@ -100,31 +77,6 @@ public class ArrayElement<T, T2> implements DataElement<T, T2> {
 	}
 
 	@Override
-	public boolean remove(Object arg0) {
-		return this.list.remove(arg0);
-	}
-
-	@Override
-	public T remove(int arg0) {
-		return this.list.remove(arg0);
-	}
-
-	@Override
-	public boolean removeAll(Collection<?> arg0) {
-		return this.list.removeAll(arg0);
-	}
-
-	@Override
-	public boolean retainAll(Collection<?> arg0) {
-		return this.list.retainAll(arg0);
-	}
-
-	@Override
-	public T set(int arg0, T arg1) {
-		return this.list.set(arg0, arg1);
-	}
-
-	@Override
 	public int size() {
 		return this.list.size();
 	}
@@ -154,5 +106,4 @@ public class ArrayElement<T, T2> implements DataElement<T, T2> {
 	public String toString(){
 		return "Classification: " + this.classification + ", Data: " + this.list;
 	}
-
 }
