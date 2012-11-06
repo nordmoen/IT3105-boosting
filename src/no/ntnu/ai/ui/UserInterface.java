@@ -3,6 +3,7 @@ package no.ntnu.ai.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import no.ntnu.ai.data.DataElement;
 import no.ntnu.ai.file.parser.Parser;
 import no.ntnu.ai.hypothesis.Generator;
 
@@ -99,7 +100,6 @@ public class UserInterface {
 							option.get(0) + "'");
 				}
 			}
-			dataParser.getData();
 		}else{
 			System.out.println("Usage:");
 			System.out.println("java " + UserInterface.class.getName() + 

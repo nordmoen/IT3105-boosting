@@ -17,4 +17,16 @@ public interface Hypothesis<T, T2> {
 	 * @return - The classification of the input
 	 */
 	public T classify(List<T2> input);
+	
+	/**
+	 * Get the weight of this classifier
+	 * @return - The weight of this classifier
+	 */
+	public double getWeight();
+	
+	/**
+	 * Set the weight of this classifier to the given weight
+	 * @param weight - The new weight of this classifier
+	 */
+	public void setWeight(double weight);
 }
