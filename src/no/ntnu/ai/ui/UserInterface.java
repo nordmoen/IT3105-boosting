@@ -9,14 +9,11 @@ import no.ntnu.ai.file.parser.Parser;
 
 
 public class UserInterface {
+	
+	private final static String FILE_STRING = "file";
+	private final static String CLASSIFIER_STRING = "classifier";
 
-	public static List<String> parseNBC(List<String> options, Parser<?, ?> parser){
-		if(parser == null){
-			throw new RuntimeException("Parser was null");
-		}
-		return null;
-	}
-	public static List<String> parseDTC(List<String> options, Parser<?, ?> parser){
+	public static List<String> parseClassifier(List<String> options, Parser<?, ?> parser){
 		if(parser == null){
 			throw new RuntimeException("Parser was null");
 		}
@@ -49,10 +46,11 @@ public class UserInterface {
 			if(s.equalsIgnoreCase("--classifier") || s.equalsIgnoreCase("-c")){
 				result.add(new ArrayList<String>());
 				i++;
+				result.get(i).add(CLASSIFIER_STRING);
 			}else if(s.equalsIgnoreCase("--filename") || s.equalsIgnoreCase("-f")){
 				result.add(new ArrayList<String>());
 				i++;
-				result.get(i).add("file");
+				result.get(i).add(FILE_STRING);
 			}else{
 				result.get(i).add(s);
 			}
@@ -70,11 +68,9 @@ public class UserInterface {
 			Map<String, Parser<?,?>> fileParsers = new HashMap<String, Parser<?,?>>();
 			try{
 				for(List<String> option : options){
-					if(option.get(0).equalsIgnoreCase("nbc")){
-						parsers.addAll(parseNBC(option, fileParsers.get(option.get(1))));
-					}else if(option.get(0).equalsIgnoreCase("dtc")){
-						parsers.addAll(parseDTC(option, fileParsers.get(option.get(1))));
-					}else if(option.get(0).equalsIgnoreCase("file")){
+					if(option.get(0).equalsIgnoreCase(CLASSIFIER_STRING)){
+						parsers.addAll(parseClassifier(option, fileParsers.get(option.get(2))));
+					}else if(option.get(0).equalsIgnoreCase(FILE_STRING)){
 						fileParsers.put(option.get(1), parseFilename(option));
 						System.out.println(fileParsers.get(option.get(1)).getData());
 					}else{
