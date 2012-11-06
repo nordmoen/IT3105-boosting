@@ -101,12 +101,14 @@ public class UserInterface {
 				}
 			}
 		}else{
+			String classy = "--" + CLASSIFIER_STRING + " classname " +
+					"numberOfClassifiers [options]";
 			System.out.println("Usage:");
 			System.out.println("java " + UserInterface.class.getName() + 
-					" --" + GLOBAL_OPTIONS + " percentage" +
-					" --" + FILE_STRING + " filereader name" +
-					" --" + CLASSIFIER_STRING + " classname numberOf [options] " +
-					"[--" + CLASSIFIER_STRING + " classname numberOf [options]]");
+					" --" + GLOBAL_OPTIONS + " percentageOfTestData" +
+					" --" + FILE_STRING + " filereader name " +
+					classy +
+					" [" + classy + "]");
 		}
 	}
 
