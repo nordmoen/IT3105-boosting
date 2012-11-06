@@ -9,6 +9,7 @@ import no.ntnu.ai.data.DataElement;
  * @author Trond
  *
  */
-public interface Parser{
-	public List<DataElement<?,?>> getData();
+public interface Parser<T, T2>{
+	public List<DataElement<T,T2>> getData();
+	public void initialize(String filename);
 }

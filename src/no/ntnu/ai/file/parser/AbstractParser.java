@@ -5,13 +5,13 @@ package no.ntnu.ai.file.parser;
  * @author Trond
  *
  */
-public abstract class AbstractParser implements Parser{
+public abstract class AbstractParser<T, T2> implements Parser<T, T2>{
 	/**
 	 * The file to be read by the parser.
 	 */
-	protected final String filename;
+	protected String filename;
 	
-	AbstractParser(String filename){
+	public void initialize(String filename){
 		this.filename = filename;
 	}
 

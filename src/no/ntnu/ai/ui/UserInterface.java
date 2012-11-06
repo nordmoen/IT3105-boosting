@@ -10,20 +10,34 @@ import no.ntnu.ai.file.parser.Parser;
 
 public class UserInterface {
 
-	public static List<String> parseNBC(List<String> options, Parser parser){
+	public static List<String> parseNBC(List<String> options, Parser<?, ?> parser){
 		if(parser == null){
 			throw new RuntimeException("Parser was null");
 		}
 		return null;
 	}
-	public static List<String> parseDTC(List<String> options, Parser parser){
+	public static List<String> parseDTC(List<String> options, Parser<?, ?> parser){
 		if(parser == null){
 			throw new RuntimeException("Parser was null");
 		}
 		return null;
 	}
 
-	public static Parser parseFilename(List<String> options){
+	public static Parser<?, ?> parseFilename(List<String> options){
+		try {
+			Parser<?, ?> p = (Parser<?, ?>) Class.forName(options.get(1)).newInstance();
+			p.initialize(options.get(2));
+			return p;
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
@@ -53,7 +67,7 @@ public class UserInterface {
 		if(args.length > 1 && !args[0].equalsIgnoreCase("--help")){
 			List<List<String>> options = parseCommandLine(args);
 			List<String> parsers = new ArrayList<String>();
-			Map<String, Parser> fileParsers = new HashMap<String, Parser>();
+			Map<String, Parser<?,?>> fileParsers = new HashMap<String, Parser<?,?>>();
 			try{
 				for(List<String> option : options){
 					if(option.get(0).equalsIgnoreCase("nbc")){
@@ -62,6 +76,7 @@ public class UserInterface {
 						parsers.addAll(parseDTC(option, fileParsers.get(option.get(1))));
 					}else if(option.get(0).equalsIgnoreCase("file")){
 						fileParsers.put(option.get(1), parseFilename(option));
+						System.out.println(fileParsers.get(option.get(1)).getData());
 					}else{
 						System.err.println("Did not recoqnize the option: '" + 
 								option.get(0) + "'");

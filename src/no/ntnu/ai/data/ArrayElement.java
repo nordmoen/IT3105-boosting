@@ -149,5 +149,10 @@ public class ArrayElement<T, T2> implements DataElement<T, T2> {
 	public T2 getClassification() {
 		return this.classification;
 	}
+	
+	@Override
+	public String toString(){
+		return "Classification: " + this.classification + ", Data: " + this.list;
+	}
 
 }
