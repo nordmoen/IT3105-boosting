@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import no.ntnu.ai.file.parser.Parser;
+import no.ntnu.ai.hypothesis.Generator;
 
 
 public class UserInterface {
@@ -13,9 +14,20 @@ public class UserInterface {
 	private final static String FILE_STRING = "file";
 	private final static String CLASSIFIER_STRING = "classifier";
 
-	public static List<String> parseClassifier(List<String> options, Parser<?, ?> parser){
-		if(parser == null){
-			throw new RuntimeException("Parser was null");
+	public static Generator<?,?> parseClassifier(List<String> options){
+		try {
+			Generator<?,?> g = (Generator<?, ?>) Class.forName(options.get(1)).newInstance();
+			g.initialize(options);
+			return g;
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			System.err.println("Could not find the specified class: " + options.get(1));
+			System.exit(-1);
 		}
 		return null;
 	}
@@ -32,8 +44,8 @@ public class UserInterface {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("Could not find the specified class: " + options.get(1));
+			System.exit(-1);
 		}
 		return null;
 	}
@@ -64,12 +76,12 @@ public class UserInterface {
 	public static void main(String[] args) {
 		if(args.length > 1 && !args[0].equalsIgnoreCase("--help")){
 			List<List<String>> options = parseCommandLine(args);
-			List<String> parsers = new ArrayList<String>();
+			List<Generator<?,?>> parserGenerators = new ArrayList<Generator<?,?>>();
 			Map<String, Parser<?,?>> fileParsers = new HashMap<String, Parser<?,?>>();
 			try{
 				for(List<String> option : options){
 					if(option.get(0).equalsIgnoreCase(CLASSIFIER_STRING)){
-						parsers.addAll(parseClassifier(option, fileParsers.get(option.get(2))));
+						parserGenerators.add(parseClassifier(option));
 					}else if(option.get(0).equalsIgnoreCase(FILE_STRING)){
 						fileParsers.put(option.get(1), parseFilename(option));
 						System.out.println(fileParsers.get(option.get(1)).getData());
@@ -89,9 +101,9 @@ public class UserInterface {
 		}else{
 			System.out.println("Usage:");
 			System.out.println("java " + UserInterface.class.getName() + 
-					" --filename filereader name [--filename filereader name]" +
-					" --classifier classname filereader [options] " +
-					"[--classifier classname filereader [options]]");
+					" --filename filereader name" +
+					" --classifier classname [options] " +
+					"[--classifier classname [options]]");
 		}
 	}
 
