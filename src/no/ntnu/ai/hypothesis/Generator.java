@@ -1,6 +1,7 @@
 package no.ntnu.ai.hypothesis;
 
 import java.util.List;
+import java.util.Map;
 
 import no.ntnu.ai.data.DataElement;
 
@@ -26,5 +27,5 @@ public interface Generator<T, T2> {
 	 * @param weights - A list of double weights signifying the current weights
 	 * @return - A new Hypothesis generated from the weights
 	 */
-	public Hypothesis<T, T2> generateHypothesis(List<DataElement<T, T2>> data, final List<Double> weights);
+	public Hypothesis<T, T2> generateHypothesis(List<DataElement<T, T2>> data, final Map<T2, Double> weights);
 }
