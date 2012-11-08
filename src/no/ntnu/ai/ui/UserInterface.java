@@ -87,6 +87,7 @@ public class UserInterface {
 	/**
 	 * @param args
 	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void main(String[] args) {
 		if(args.length > 1 && !args[0].equalsIgnoreCase("--help")){
 			List<List<String>> options = parseCommandLine(args);
@@ -106,29 +107,44 @@ public class UserInterface {
 				}
 			}
 			//Shuffle data
-			List<DataElement<?, ?>> data = dataParser.getData();
+			List<?> data = dataParser.getData();
 			Collections.shuffle(data);
-			List<DataElement<?, ?>> training = data.subList(0, (int)(data.size() - data.size()*percentage));
-			List<DataElement<?, ?>> test = data.subList((int)(data.size() - data.size()*percentage), data.size());
+			List<DataElement<?, ?>> training = (List<DataElement<?, ?>>) data.subList(0, (int)(data.size() - data.size()*percentage));
+			List<DataElement<?, ?>> test = (List<DataElement<?, ?>>) data.subList((int)(data.size() - data.size()*percentage), data.size());
 			//Use adaboost to obtain result:
-
-			Map<String, Double> avg = new HashMap<String, Double>();
-			Map<String, Double> stdev = new HashMap<String, Double>();
 
 			for(List<Generator<?, ?>> l : classifierGenerators){
 				AdaBoost<?, ?> boost = new AdaBoost(l, training);
-				List<Hypothesis<?, ?>> hypos = boost.runBooster();
+				List<?> hypos = boost.runBooster();
 
-				double avgVal = 0;
-				double stdVal = 0;
-				for(Hypothesis<?, ?> h : hypos){
-
+				int error = 0;
+				for(DataElement dat : test){
+					Map<Object, Double> classStrength = new HashMap<Object, Double>();
+					for(Object o : hypos){
+						Hypothesis h = (Hypothesis) o;
+						Object classi = h.classify(dat.cloneList());
+						if(!classStrength.containsKey(classi)){
+							classStrength.put(classi, 0.0);
+						}
+						classStrength.put(classi, classStrength.get(classi) + h.getWeight());
+					}
+					Object max = null;
+					double maxVal = -1;
+					for(Object o : classStrength.keySet()){
+						if(classStrength.get(o) > maxVal){
+							max = o;
+							maxVal = classStrength.get(o);
+						}
+					}
+					if(!dat.getClassification().equals(max)){
+						error ++;
+					}
 				}
-				avg.put(hypos.get(0).getClass().getName(), avgVal);
-				stdev.put(hypos.get(0).getClass().getName(), stdVal);
+				System.out.println(hypos.get(0).getClass().getName() + ":");
+				System.out.println("Training avg: " + boost.getAvg() + 
+						", std dev: " + boost.getStdDev());
+				System.out.println("Test error: " + error);
 			}
-			System.out.println("Average:\n" + avg);
-			System.out.println("Std dev:\n" + stdev);
 
 		}else{
 			String classy = "--" + CLASSIFIER_STRING + " classname " +
