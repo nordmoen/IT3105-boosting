@@ -37,7 +37,7 @@ public class NBCGenerator<T extends Number, T2> implements Generator<T, T2>{
 			}
 		}
 
-		return null;
+		return new NBClassifier<T, T2>(aProbs, attProbs);
 	}
 
 
