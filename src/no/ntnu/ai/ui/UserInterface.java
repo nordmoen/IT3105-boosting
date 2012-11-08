@@ -147,7 +147,7 @@ public class UserInterface {
 				System.out.println(hypos.get(0).getClass().getName() + ":");
 				System.out.println("Training avg: " + boost.getAvg() + 
 						", std dev: " + boost.getStdDev());
-				System.out.println("Test error: " + error);
+				System.out.println("Test error: " + error + " of " + test.size());
 			}
 
 		}else{
