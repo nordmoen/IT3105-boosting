@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import no.ntnu.ai.boost.AdaBoost;
 import no.ntnu.ai.data.DataElement;
@@ -94,6 +95,7 @@ public class UserInterface {
 			List<List<Generator<?,?>>> classifierGenerators = new ArrayList<List<Generator<?,?>>>();
 			Parser<?, ?> dataParser = null;
 			double percentage = 0.25;
+			int randomValue = 42;
 			for(List<String> option : options){
 				if(option.get(0).equalsIgnoreCase(CLASSIFIER_STRING)){
 					classifierGenerators.add(parseClassifier(option));
@@ -101,6 +103,8 @@ public class UserInterface {
 					dataParser = parseFilename(option);
 				}else if(option.get(0).equalsIgnoreCase(GLOBAL_OPTIONS)){
 					percentage = Double.parseDouble(option.get(1));
+					randomValue = Integer.parseInt(option.get(2));
+					
 				}else{
 					System.err.println("Did not recoqnize the option: '" + 
 							option.get(0) + "'");
@@ -108,7 +112,7 @@ public class UserInterface {
 			}
 			//Shuffle data
 			List<?> data = dataParser.getData();
-			Collections.shuffle(data);
+			Collections.shuffle(data, new Random(randomValue));
 			List<DataElement<?, ?>> training = (List<DataElement<?, ?>>) data.subList(0, (int)(data.size() - data.size()*percentage));
 			List<DataElement<?, ?>> test = (List<DataElement<?, ?>>) data.subList((int)(data.size() - data.size()*percentage), data.size());
 			//Use adaboost to obtain result:
@@ -151,7 +155,7 @@ public class UserInterface {
 					"numberOfClassifiers [options]";
 			System.out.println("Usage:");
 			System.out.println("java " + UserInterface.class.getName() + 
-					" --" + GLOBAL_OPTIONS + " percentageOfTestData" +
+					" --" + GLOBAL_OPTIONS + " percentageOfTestData randomKey" +
 					" --" + FILE_STRING + " filereader name " +
 					classy +
 					" [" + classy + "]");
