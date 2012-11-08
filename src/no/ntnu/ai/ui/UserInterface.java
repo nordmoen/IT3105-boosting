@@ -87,7 +87,7 @@ public class UserInterface {
 	/**
 	 * @param args
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "unchecked" })
 	public static void main(String[] args) {
 		if(args.length > 1 && !args[0].equalsIgnoreCase("--help")){
 			List<List<String>> options = parseCommandLine(args);
