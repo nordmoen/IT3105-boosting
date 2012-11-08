@@ -1,7 +1,9 @@
 package no.ntnu.ai.boost;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import no.ntnu.ai.data.DataElement;
 import no.ntnu.ai.hypothesis.Generator;
@@ -10,16 +12,16 @@ import no.ntnu.ai.hypothesis.Hypothesis;
 public class AdaBoost<T, T2> {
 	private final List<Generator<T, T2>> generators;
 	private final List<DataElement<T, T2>> data;
-	private final List<Double> weights;
+	private final Map<T2, Double> weights;
 	private final List<Double> errorList;
 	private boolean hasRun = false;
 	
 	public AdaBoost(List<Generator<T, T2>> generators, List<DataElement<T, T2>> data){
 		this.generators = generators;
 		this.data = data;
-		weights = new ArrayList<Double>(data.size());
+		weights = new HashMap<T2, Double>();
 		for(int i = 0; i < data.size(); i++){
-			weights.add(1.0/data.size());
+			weights.put(data.get(i).getClassification(), 1.0/data.size());
 		}
 		errorList = new ArrayList<Double>(data.size());
 	}
@@ -40,17 +42,18 @@ public class AdaBoost<T, T2> {
 		for(int i = 0; i < this.weights.size(); i++){
 			DataElement<T, T2> d = data.get(i);
 			if(h.classify(d).equals(d.getClassification())){
-				weights.set(i, weights.get(i)*(error/(1-error)));
+				weights.put(d.getClassification(), 
+						weights.get(d.getClassification())*(error/(1-error)));
 			}else{
-				error += weights.get(i);
+				error += weights.get(d.getClassification());
 			}
 		}
 		double sum = 0;
-		for(Double w : this.weights){
+		for(Double w : this.weights.values()){
 			sum += w;
 		}
-		for(int i = 0; i < this.weights.size(); i++){
-			this.weights.set(i, weights.get(i)/sum);
+		for(T2 classi : weights.keySet()){
+			this.weights.put(classi, weights.get(classi)/sum);
 		}
 		errorList.add(error);
 		h.setWeight(Math.log((1-error)/error)/Math.log(2));

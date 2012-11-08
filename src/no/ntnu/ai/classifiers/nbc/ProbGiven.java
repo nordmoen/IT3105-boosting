@@ -18,8 +18,13 @@ public class ProbGiven<T> {
 	}
 	
 	public double calc(T classi, double value){
-		double base = 1.0 / Math.sqrt(2 * Math.PI * this.vari.get(classi));
-		double exp = -(Math.pow(value - this.avg.get(classi), 2) / 2 * this.vari.get(classi));
+		double base = 1.0 / (Math.sqrt(2 * Math.PI * this.vari.get(classi)));
+		double exp = -(Math.pow(value - this.avg.get(classi), 2)) / (2 * this.vari.get(classi));
 		return base * Math.exp(exp);
+	}
+	
+	@Override
+	public String toString(){
+		return "ProbGiven: " + this.avg +" , "+ this.vari;
 	}
 }

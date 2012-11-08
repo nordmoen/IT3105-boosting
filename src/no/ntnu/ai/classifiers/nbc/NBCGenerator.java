@@ -13,25 +13,25 @@ public class NBCGenerator<T extends Number, T2> implements Generator<T, T2>{
 	
 
 	@Override
-	public Hypothesis<T, T2> generateHypothesis(List<DataElement<T, T2>> data, List<Double> weights) {
-		Map<T2, Integer> occurences = new HashMap<T2, Integer>();
+	public Hypothesis<T, T2> generateHypothesis(List<DataElement<T, T2>> data, Map<T2, Double> weights) {
+		Map<T2, Double> occurences = new HashMap<T2, Double>();
 		for(DataElement<T, T2> dat : data){
 			if(!occurences.containsKey(dat.getClassification())){
-				occurences.put(dat.getClassification(), 0);
+				occurences.put(dat.getClassification(), 0.0);
 			}
 			occurences.put(dat.getClassification(), occurences.get(dat.getClassification()) + 1);
 		}
 		
 		Map<T2, Double> aProbs = new HashMap<T2, Double>();
 		for(T2 key : occurences.keySet()){
-			aProbs.put(key, (double)(occurences.get(key) / data.size()));
+			aProbs.put(key, (occurences.get(key) / data.size()));
 		}
 		
 		List<ProbGiven<T2>> attProbs = new ArrayList<ProbGiven<T2>>();
 		for(int i=0; i<data.get(0).size(); i++){
 			attProbs.add(new ProbGiven<T2>());
 			for(T2 classi : occurences.keySet()){
-				double avg = findAvg(classi, i, data);
+				double avg = findAvg(classi, i, data, weights);
 				double var = findVar(classi, i, data, avg);
 				attProbs.get(i).addClassi(classi, avg, var);
 			}
@@ -41,27 +41,27 @@ public class NBCGenerator<T extends Number, T2> implements Generator<T, T2>{
 	}
 
 
-	private double findVar(T2 classi, int i, List<DataElement<T, T2>> data,
+	private double findVar(T2 classi, int attr, List<DataElement<T, T2>> data,
 			double avg) {
 		double occ = 0.0;
 		double sum = 0.0;
 		for(DataElement<T, T2> dat: data){
 			if(dat.getClassification().equals(classi)){
 				occ++;
-				sum += Math.pow(dat.get(i).doubleValue()-avg, 2);					
+				sum += Math.pow(dat.get(attr).doubleValue()-avg, 2);					
 			}
 		}
 		return sum/occ;
 	}
 
 
-	private double findAvg(T2 classi, int i, List<DataElement<T, T2>> data) {
+	private double findAvg(T2 classi, int attr, List<DataElement<T, T2>> data, Map<T2, Double> weights) {
 		int occ = 0;
 		double sum = 0;
 		for(DataElement<T, T2> dat: data){
 			if(dat.getClassification().equals(classi)){
 				occ++;
-				sum += dat.get(i).doubleValue();					
+				sum += dat.get(attr).doubleValue() * weights.get(classi);
 			}
 		}
 		return sum/occ;
