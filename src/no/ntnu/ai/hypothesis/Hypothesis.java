@@ -16,7 +16,7 @@ public interface Hypothesis<T, T2> {
 	 * @param input - The list to classify
 	 * @return - The classification of the input
 	 */
-	public T classify(List<T2> input);
+	public T2 classify(List<T> input);
 	
 	/**
 	 * Get the weight of this classifier

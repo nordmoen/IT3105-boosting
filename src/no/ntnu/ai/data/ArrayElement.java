@@ -46,9 +46,8 @@ public class ArrayElement<T, T2> extends AbstractList<T> implements DataElement<
 		return this.list.get(arg0);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<T> cloneList(){
-		return (List<T>) this.list.clone();
+		return this.list;
 	}
 
 	@Override

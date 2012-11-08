@@ -24,5 +24,5 @@ public interface Generator<T, T2> {
 	 * @param weights - A list of double weights signifying the current weights
 	 * @return - A new Hypothesis generated from the weights
 	 */
-	public Hypothesis<T, T2> generateHypothesis(List<Double> weights);
+	public Hypothesis<T, T2> generateHypothesis(final List<Double> weights);
 }

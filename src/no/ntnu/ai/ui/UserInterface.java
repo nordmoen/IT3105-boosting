@@ -1,11 +1,16 @@
 package no.ntnu.ai.ui;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import no.ntnu.ai.boost.AdaBoost;
 import no.ntnu.ai.data.DataElement;
 import no.ntnu.ai.file.parser.Parser;
 import no.ntnu.ai.hypothesis.Generator;
+import no.ntnu.ai.hypothesis.Hypothesis;
 
 
 public class UserInterface {
@@ -85,12 +90,12 @@ public class UserInterface {
 	public static void main(String[] args) {
 		if(args.length > 1 && !args[0].equalsIgnoreCase("--help")){
 			List<List<String>> options = parseCommandLine(args);
-			List<Generator<?,?>> classifierGenerators = new ArrayList<Generator<?,?>>();
+			List<List<Generator<?,?>>> classifierGenerators = new ArrayList<List<Generator<?,?>>>();
 			Parser<?, ?> dataParser = null;
 			double percentage = 0.25;
 			for(List<String> option : options){
 				if(option.get(0).equalsIgnoreCase(CLASSIFIER_STRING)){
-					classifierGenerators.addAll(parseClassifier(option));
+					classifierGenerators.add(parseClassifier(option));
 				}else if(option.get(0).equalsIgnoreCase(FILE_STRING)){
 					dataParser = parseFilename(option);
 				}else if(option.get(0).equalsIgnoreCase(GLOBAL_OPTIONS)){
@@ -100,6 +105,31 @@ public class UserInterface {
 							option.get(0) + "'");
 				}
 			}
+			//Shuffle data
+			List<DataElement<?, ?>> data = dataParser.getData();
+			Collections.shuffle(data);
+			List<DataElement<?, ?>> training = data.subList(0, (int)(data.size() - data.size()*percentage));
+			List<DataElement<?, ?>> test = data.subList((int)(data.size() - data.size()*percentage), data.size());
+			//Use adaboost to obtain result:
+
+			Map<String, Double> avg = new HashMap<String, Double>();
+			Map<String, Double> stdev = new HashMap<String, Double>();
+
+			for(List<Generator<?, ?>> l : classifierGenerators){
+				AdaBoost<?, ?> boost = new AdaBoost(l, training);
+				List<Hypothesis<?, ?>> hypos = boost.runBooster();
+
+				double avgVal = 0;
+				double stdVal = 0;
+				for(Hypothesis<?, ?> h : hypos){
+
+				}
+				avg.put(hypos.get(0).getClass().getName(), avgVal);
+				stdev.put(hypos.get(0).getClass().getName(), stdVal);
+			}
+			System.out.println("Average:\n" + avg);
+			System.out.println("Std dev:\n" + stdev);
+
 		}else{
 			String classy = "--" + CLASSIFIER_STRING + " classname " +
 					"numberOfClassifiers [options]";
