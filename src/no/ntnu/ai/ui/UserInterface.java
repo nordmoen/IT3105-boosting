@@ -1,6 +1,7 @@
 package no.ntnu.ai.ui;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -104,7 +105,7 @@ public class UserInterface {
 				}else if(option.get(0).equalsIgnoreCase(GLOBAL_OPTIONS)){
 					percentage = Double.parseDouble(option.get(1));
 					randomValue = Integer.parseInt(option.get(2));
-					
+
 				}else{
 					System.err.println("Did not recoqnize the option: '" + 
 							option.get(0) + "'");
@@ -117,42 +118,45 @@ public class UserInterface {
 			List<DataElement<?, ?>> test = (List<DataElement<?, ?>>) data.subList((int)(data.size() - data.size()*percentage), data.size());
 			//Use adaboost to obtain result:
 
+			List<Hypothesis> hypotheses = new ArrayList();
 			for(List<Generator<?, ?>> l : classifierGenerators){
 				AdaBoost<?, ?> boost = new AdaBoost(l, training);
 				List<?> hypos = boost.runBooster();
+				hypotheses.addAll((Collection<? extends Hypothesis>) hypos);
+				System.out.println(hypos.get(0).getClass().getName() + ":");
+				System.out.println("\tTraining avg error: " + boost.getAvg() + 
+						", std dev of error: " + boost.getStdDev());
+			}
 
-				int error = 0;
-				for(DataElement dat : test){
-					Map<Object, Double> classStrength = new HashMap<Object, Double>();
-					for(Object o : hypos){
-						Hypothesis h = (Hypothesis) o;
-						Object classi = h.classify(dat.cloneList());
-						if(!classStrength.containsKey(classi)){
-							classStrength.put(classi, 0.0);
-						}
-						classStrength.put(classi, classStrength.get(classi) + h.getWeight());
+			System.out.println("");
+			int error = 0;
+			for(DataElement dat : test){
+				Map<Object, Double> classStrength = new HashMap<Object, Double>();
+				for(Object o : hypotheses){
+					Hypothesis h = (Hypothesis) o;
+					Object classi = h.classify(dat.cloneList());
+					if(!classStrength.containsKey(classi)){
+						classStrength.put(classi, 0.0);
 					}
-					Object max = null;
-					double maxVal = -1;
-					for(Object o : classStrength.keySet()){
-						if(classStrength.get(o) > maxVal){
-							max = o;
-							maxVal = classStrength.get(o);
-						}
-					}
-					if(!dat.getClassification().equals(max)){
-						error ++;
+					classStrength.put(classi, classStrength.get(classi) + h.getWeight());
+				}
+				Object max = null;
+				double maxVal = -1;
+				for(Object o : classStrength.keySet()){
+					if(classStrength.get(o) > maxVal){
+						max = o;
+						maxVal = classStrength.get(o);
 					}
 				}
-				System.out.println(hypos.get(0).getClass().getName() + ":");
-				System.out.println("Training avg error: " + boost.getAvg() + 
-						", std dev of error: " + boost.getStdDev());
-				System.out.println("Test error: " + error + " of " + test.size());
+				if(!dat.getClassification().equals(max)){
+					error ++;
+				}
 			}
+			System.out.println("Test error: " + error + " of " + test.size());
 
 		}else{
 			String classy = "--" + CLASSIFIER_STRING + " classname " +
-					"numberOfClassifiers [options]";
+			"numberOfClassifiers [options]";
 			System.out.println("Usage:");
 			System.out.println("java " + UserInterface.class.getName() + 
 					" --" + GLOBAL_OPTIONS + " percentageOfTestData randomKey" +
