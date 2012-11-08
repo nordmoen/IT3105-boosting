@@ -39,7 +39,7 @@ public class AdaBoost<T, T2> {
 		double error = 0;
 		for(int i = 0; i < this.weights.size(); i++){
 			DataElement<T, T2> d = data.get(i);
-			if(h.classify(d.cloneList()).equals(d.getClassification())){
+			if(h.classify(d).equals(d.getClassification())){
 				weights.set(i, weights.get(i)*(error/(1-error)));
 			}else{
 				error += weights.get(i);

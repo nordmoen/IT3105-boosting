@@ -1,8 +1,6 @@
 package no.ntnu.ai.data;
 
 import java.util.List;
-
-import no.ntnu.ai.hypothesis.Hypothesis;
 /**
  * Represents a single instance of some data, which contains any number of features
  * and a classification of the instance. The features can be of any type as long
@@ -18,10 +16,4 @@ public interface DataElement<T, T2> extends List<T>{
 	 * @return - The classification of the features
 	 */
 	public T2 getClassification();
-	
-	/**
-	 * Clone the underlying list into for use with {@link Hypothesis}
-	 * @return - A list of data elements of type T
-	 */
-	public List<T> cloneList();
 }

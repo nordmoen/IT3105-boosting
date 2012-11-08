@@ -45,10 +45,6 @@ public class ArrayElement<T, T2> extends AbstractList<T> implements DataElement<
 	public T get(int arg0) {
 		return this.list.get(arg0);
 	}
-	
-	public List<T> cloneList(){
-		return this.list;
-	}
 
 	@Override
 	public int indexOf(Object arg0) {

@@ -126,7 +126,7 @@ public class UserInterface {
 					Map<Object, Double> classStrength = new HashMap<Object, Double>();
 					for(Object o : hypos){
 						Hypothesis h = (Hypothesis) o;
-						Object classi = h.classify(dat.cloneList());
+						Object classi = h.classify(dat);
 						if(!classStrength.containsKey(classi)){
 							classStrength.put(classi, 0.0);
 						}
