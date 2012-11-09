@@ -13,7 +13,7 @@ public class NBCGenerator<T extends Number, T2> implements Generator<T, T2>{
 	
 
 	@Override
-	public Hypothesis<T, T2> generateHypothesis(List<DataElement<T, T2>> data, Map<T2, Double> weights) {
+	public Hypothesis<T, T2> generateHypothesis(List<DataElement<T, T2>> data, Map<Integer, Double> weights) {
 		Map<T2, Double> occurences = new HashMap<T2, Double>();
 		for(DataElement<T, T2> dat : data){
 			if(!occurences.containsKey(dat.getClassification())){
@@ -55,16 +55,19 @@ public class NBCGenerator<T extends Number, T2> implements Generator<T, T2>{
 	}
 
 
-	private double findAvg(T2 classi, int attr, List<DataElement<T, T2>> data, Map<T2, Double> weights) {
+	private double findAvg(T2 classi, int attr, List<DataElement<T, T2>> data, Map<Integer, Double> weights) {
 		int occ = 0;
 		double sum = 0;
-		for(DataElement<T, T2> dat: data){
+		double wSum = 0.0;
+		for(int i=0; i<data.size(); i++){
+			DataElement<T, T2> dat = data.get(i);
 			if(dat.getClassification().equals(classi)){
 				occ++;
-				sum += dat.get(attr).doubleValue() * weights.get(classi);
+				sum += dat.get(attr).doubleValue();
+				wSum += weights.get(i);
 			}
 		}
-		return sum/occ;
+		return sum/(occ);
 	}
 
 
