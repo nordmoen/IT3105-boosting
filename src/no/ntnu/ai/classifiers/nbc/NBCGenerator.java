@@ -19,6 +19,10 @@ public class NBCGenerator<T extends Number, T2> implements Generator<T, T2>{
 			if(!occurences.containsKey(dat.getClassification())){
 				occurences.put(dat.getClassification(), 0.0);
 			}
+			/*
+			 * Late night thinking: add weight of the training DataElement instead of 1 here.
+			 * Then we can multiply in weight of each example later and maybe get useful result?
+			*/
 			occurences.put(dat.getClassification(), occurences.get(dat.getClassification()) + 1);
 		}
 		
