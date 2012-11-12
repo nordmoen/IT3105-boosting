@@ -27,7 +27,7 @@ public class DTCTools<T extends Number, T2> {
 	
 	private double calc(double occurs, double total){
 		double tmp = occurs / total;
-		return tmp*Math.log10(tmp);
+		return tmp*(Math.log10(tmp)/Math.log10(2));
 	}
 
 }

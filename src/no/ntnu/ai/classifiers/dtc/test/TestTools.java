@@ -1,8 +1,9 @@
 package no.ntnu.ai.classifiers.dtc.test;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import java.util.List;
+
 
 import no.ntnu.ai.classifiers.dtc.DTCTools;
 import no.ntnu.ai.data.DataElement;
@@ -14,21 +15,20 @@ import org.junit.Test;
 
 public class TestTools {
 
-	private static List<DataElement<Integer, Integer>> data;
+	private static List<DataElement<Integer, Integer>> data2;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		FileParser parser = new FileParser();
-		parser.initialize("training sets/glass.txt");
+		parser.initialize("training sets/test.txt");	
 		GlassFilter filter = new GlassFilter();
-		data = filter.convert(parser.getData());
+		data2 = filter.convert(parser.getData());
 	}
 
 	@Test
 	public void testEntropy() {
 		DTCTools<Integer, Integer> tool = new DTCTools<Integer, Integer>();
-		System.out.println(tool.entropy(data));
-		fail("Not yet implemented");
+		assertEquals(0.954, tool.entropy(data2), 0.0009);
 	}
 
 }
