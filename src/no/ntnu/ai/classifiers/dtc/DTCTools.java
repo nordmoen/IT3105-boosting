@@ -1,5 +1,6 @@
 package no.ntnu.ai.classifiers.dtc;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,22 @@ public class DTCTools<T extends Number, T2> {
 			sum += this.calc(occurs.get(classi), list.size());
 		}
 		return -sum;
+	}
+	
+	public double splitEntropy(int index, List<DataElement<T, T2>> list){
+		Map<T, List<DataElement<T, T2>>> branches = new HashMap<T, List<DataElement<T,T2>>>();
+		for(DataElement<T, T2> dat : list){
+			T classi = dat.get(index);
+			if(!branches.containsKey(classi)){
+				branches.put(classi, new ArrayList<DataElement<T,T2>>());
+			}
+			branches.get(classi).add(dat);
+		}
+		double sum = 0.0;
+		for(T classi : branches.keySet()){
+			sum += ((double)branches.get(classi).size() / list.size()) * this.entropy(branches.get(classi));
+		}
+		return sum;
 	}
 	
 	private double calc(double occurs, double total){
