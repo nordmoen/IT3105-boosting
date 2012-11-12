@@ -6,24 +6,30 @@ import java.util.List;
 import no.ntnu.ai.data.ArrayElement;
 import no.ntnu.ai.data.DataElement;
 
-public abstract class AbstractFilter<T, T2, T3> implements Filter<T, T2, T3>{
+public abstract class AbstractFilter<T, T2, T3> implements Filter<T, T2>{
 
 	@Override
 	public List<DataElement<T, T2>> convert(
-			List<DataElement<T3, T2>> input) {
+			List<DataElement<String, String>> input) {
 		List<DataElement<T, T2>> result = new ArrayList<DataElement<T,T2>>();
-		for(DataElement<T3, T2> dat : input){
+		for(DataElement<String, String> dat : input){
 			List<T> values = new ArrayList<T>();
 			for(int i=0; i<dat.size(); i++){
 				values.add (val(i, dat.get(i)));
 			}
-			result.add(new ArrayElement<T, T2>(values, dat.getClassification()));
+			result.add(new ArrayElement<T, T2>(values, 
+					convertClassification(dat.getClassification())));
 			
 		}
 		return result;
 	}
 	
-	private T val(int index, T3 val){
+	protected abstract T2 convertClassification(String classif);
+	
+	protected abstract T3 convertValue(String value);
+	
+	private T val(int index, String val2){
+		T3 val = convertValue(val2);
 		switch (index) {
 		case 0:
 			return val0(val);

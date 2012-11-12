@@ -10,6 +10,7 @@ import java.util.Random;
 
 import no.ntnu.ai.boost.AdaBoost;
 import no.ntnu.ai.data.DataElement;
+import no.ntnu.ai.file.parser.FileParser;
 import no.ntnu.ai.file.parser.Parser;
 import no.ntnu.ai.filter.Filter;
 import no.ntnu.ai.hypothesis.Generator;
@@ -45,30 +46,11 @@ public class UserInterface {
 		}
 		return null;
 	}
-
-	public static Parser<Object, Object> parseFilename(List<String> options){
-		try {
-			@SuppressWarnings("unchecked")
-			Parser<Object, Object> p = (Parser<Object, Object>) Class.forName(options.get(1)).newInstance();
-			p.initialize(options.get(2));
-			return p;
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			System.err.println("Could not find the specified class: " + options.get(1));
-			System.exit(-1);
-		}
-		return null;
-	}
 	
-	public static Filter<Object, Object, Object> parseFilter(List<String> options){
+	public static Filter<Object, Object> parseFilter(List<String> options){
 		try {
 			@SuppressWarnings("unchecked")
-			Filter<Object, Object, Object> f = (Filter<Object, Object, Object>) Class.forName(options.get(1)).newInstance();
+			Filter<Object, Object> f = (Filter<Object, Object>) Class.forName(options.get(1)).newInstance();
 			f.initialize(options.subList(2, options.size()));
 			return f;
 		} catch (InstantiationException e) {
@@ -120,15 +102,16 @@ public class UserInterface {
 		if(args.length > 1 && !args[0].equalsIgnoreCase("--help")){
 			List<List<String>> options = parseCommandLine(args);
 			List<List<Generator<?,?>>> classifierGenerators = new ArrayList<List<Generator<?,?>>>();
-			Parser<Object, Object> dataParser = null;
-			Filter<Object, Object, Object> dataFilter = null;
+			Parser<String, String> dataParser = null;
+			Filter<Object, Object> dataFilter = null;
 			double percentage = 0.25;
 			int randomValue = 42;
 			for(List<String> option : options){
 				if(option.get(0).equalsIgnoreCase(CLASSIFIER_STRING)){
 					classifierGenerators.add(parseClassifier(option));
 				}else if(option.get(0).equalsIgnoreCase(FILE_STRING)){
-					dataParser = parseFilename(option);
+					dataParser = new FileParser();
+					dataParser.initialize(option.get(1));
 				}else if(option.get(0).equalsIgnoreCase(GLOBAL_OPTIONS)){
 					percentage = Double.parseDouble(option.get(1));
 					randomValue = Integer.parseInt(option.get(2));
@@ -188,7 +171,7 @@ public class UserInterface {
 			System.out.println("Usage:");
 			System.out.println("java " + UserInterface.class.getName() + 
 					" [--" + GLOBAL_OPTIONS + " percentageOfTestData randomKey]" +
-					" --" + FILE_STRING + " filereader name" +
+					" --" + FILE_STRING + " name" +
 					" --" + FILTER_STRING + " filter" +
 					classy +
 					" [" + classy + "]");

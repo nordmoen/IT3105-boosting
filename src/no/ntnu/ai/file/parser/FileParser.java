@@ -11,17 +11,17 @@ import java.util.Scanner;
 import no.ntnu.ai.data.ArrayElement;
 import no.ntnu.ai.data.DataElement;
 
-public class DoubleParser extends AbstractParser<Double, Integer> {
+public class FileParser extends AbstractParser<String, String> {
 
 	private boolean readData = false;
-	private final List<DataElement<Double, Integer>> data;
+	private final List<DataElement<String, String>> data;
 
-	public DoubleParser() {
-		data = new ArrayList<DataElement<Double,Integer>>();
+	public FileParser() {
+		data = new ArrayList<DataElement<String, String>>();
 	}
 
 	@Override
-	public List<DataElement<Double, Integer>> getData() {
+	public List<DataElement<String, String>> getData() {
 		if(!readData){
 			if(this.filename.isEmpty()){
 				throw new IllegalStateException("Filename is not initialized properly");
@@ -33,13 +33,13 @@ public class DoubleParser extends AbstractParser<Double, Integer> {
 				scan = new Scanner(fis);
 				while(scan.hasNextLine()){
 					String[] line = scan.nextLine().split(",");
-					Double[] features = new Double[line.length - 1];
+					String[] features = new String[line.length - 1];
 					for(int i = 0; i < line.length - 1; i++){
-						features[i] = Double.parseDouble(line[i]);
+						features[i] = line[i].trim();
 					}
-					DataElement<Double, Integer> dataLine = 
-							new ArrayElement<Double, Integer>(features, 
-									Integer.parseInt(line[line.length - 1]));
+					DataElement<String, String> dataLine = 
+							new ArrayElement<String, String>(features, 
+									line[line.length - 1]);
 					this.data.add(dataLine);
 				}
 				fis.close();

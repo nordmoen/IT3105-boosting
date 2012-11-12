@@ -112,4 +112,14 @@ public class GlassFilter extends AbstractFilter<Integer, Integer, Double> {
 		
 	}
 
+	@Override
+	protected Integer convertClassification(String classif) {
+		return Integer.parseInt(classif);
+	}
+
+	@Override
+	protected Double convertValue(String value) {
+		return Double.parseDouble(value);
+	}
+
 }
