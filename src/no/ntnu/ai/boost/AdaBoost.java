@@ -41,11 +41,14 @@ public class AdaBoost<T, T2> {
 		double error = 0;
 		for(int i = 0; i < this.weights.size(); i++){
 			DataElement<T, T2> d = data.get(i);
-			if(h.classify(d).equals(d.getClassification())){
-				weights.put(i, 
-						weights.get(i)*(error/(1-error)));
-			}else{
+			if(!h.classify(d).equals(d.getClassification())){
 				error += weights.get(i);
+			}
+		}
+		for(int i = 0; i < this.weights.size(); i++){
+			DataElement<T, T2> d = data.get(i);
+			if(h.classify(d).equals(d.getClassification())){
+				this.weights.put(i, this.weights.get(i)*(error/(1-error)));
 			}
 		}
 		double sum = 0;
