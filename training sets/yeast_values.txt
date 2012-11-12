@@ -1,0 +1,6 @@
+Maximum Values for each attribute:
+[1.0, 1.0, 1.0, 1.0, 1.0, 0.83, 0.73, 1.0, 10.0]
+Minimum Values for each attribute:
+[0.11, 0.13, 0.21, 0.0, 0.5, 0.0, 0.0, 0.0, 1.0]
+Average Values for each attribute:
+[0.555, 0.565, 0.605, 0.5, 0.75, 0.415, 0.365, 0.5, 5.5]
