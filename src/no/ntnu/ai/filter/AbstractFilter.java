@@ -24,10 +24,26 @@ public abstract class AbstractFilter<T, T2, T3> implements Filter<T, T2>{
 		return result;
 	}
 	
+	/**
+	 * Convert the classification to the correct type for this filter
+	 * @param classif - The classification to convert
+	 * @return - The classification converted to the correct type
+	 */
 	protected abstract T2 convertClassification(String classif);
 	
+	/**
+	 * Convert the element value to the correct type for this filter
+	 * @param value - The element value to convert
+	 * @return - The element value converted to correct type
+	 */
 	protected abstract T3 convertValue(String value);
 	
+	/**
+	 * Convert the element at index into a correct value for this filter
+	 * @param index - The index
+	 * @param val2 - The value at that index
+	 * @return - The new value for that index
+	 */
 	private T val(int index, String val2){
 		T3 val = convertValue(val2);
 		switch (index) {
