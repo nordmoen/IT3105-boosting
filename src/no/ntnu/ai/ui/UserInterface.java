@@ -11,6 +11,7 @@ import java.util.Random;
 import no.ntnu.ai.boost.AdaBoost;
 import no.ntnu.ai.data.DataElement;
 import no.ntnu.ai.file.parser.Parser;
+import no.ntnu.ai.filter.Filter;
 import no.ntnu.ai.hypothesis.Generator;
 import no.ntnu.ai.hypothesis.Hypothesis;
 
@@ -20,6 +21,7 @@ public class UserInterface {
 	private final static String FILE_STRING = "file";
 	private final static String CLASSIFIER_STRING = "classifier";
 	private final static String GLOBAL_OPTIONS = "global";
+	private final static String FILTER_STRING = "filter";
 
 	public static List<Generator<?,?>> parseClassifier(List<String> options){
 		try {
@@ -44,11 +46,31 @@ public class UserInterface {
 		return null;
 	}
 
-	public static Parser<?, ?> parseFilename(List<String> options){
+	public static Parser<Object, Object> parseFilename(List<String> options){
 		try {
-			Parser<?, ?> p = (Parser<?, ?>) Class.forName(options.get(1)).newInstance();
+			@SuppressWarnings("unchecked")
+			Parser<Object, Object> p = (Parser<Object, Object>) Class.forName(options.get(1)).newInstance();
 			p.initialize(options.get(2));
 			return p;
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			System.err.println("Could not find the specified class: " + options.get(1));
+			System.exit(-1);
+		}
+		return null;
+	}
+	
+	public static Filter<Object, Object, Object, Object> parseFilter(List<String> options){
+		try {
+			@SuppressWarnings("unchecked")
+			Filter<Object, Object, Object, Object> f = (Filter<Object, Object, Object, Object>) Class.forName(options.get(1)).newInstance();
+			f.initialize(options.subList(2, options.size()));
+			return f;
 		} catch (InstantiationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -79,6 +101,10 @@ public class UserInterface {
 				result.add(new ArrayList<String>());
 				i++;
 				result.get(i).add(GLOBAL_OPTIONS);
+			}else if(s.equalsIgnoreCase("--" + FILTER_STRING) || s.equalsIgnoreCase("-fi")){
+				result.add(new ArrayList<String>());
+				i++;
+				result.get(i).add(FILTER_STRING);
 			}else{
 				result.get(i).add(s);
 			}
@@ -94,7 +120,8 @@ public class UserInterface {
 		if(args.length > 1 && !args[0].equalsIgnoreCase("--help")){
 			List<List<String>> options = parseCommandLine(args);
 			List<List<Generator<?,?>>> classifierGenerators = new ArrayList<List<Generator<?,?>>>();
-			Parser<?, ?> dataParser = null;
+			Parser<Object, Object> dataParser = null;
+			Filter<Object, Object, Object, Object> dataFilter = null;
 			double percentage = 0.25;
 			int randomValue = 42;
 			for(List<String> option : options){
@@ -105,14 +132,15 @@ public class UserInterface {
 				}else if(option.get(0).equalsIgnoreCase(GLOBAL_OPTIONS)){
 					percentage = Double.parseDouble(option.get(1));
 					randomValue = Integer.parseInt(option.get(2));
-
+				}else if(option.get(0).equalsIgnoreCase(FILTER_STRING)){
+					dataFilter = parseFilter(option);
 				}else{
 					System.err.println("Did not recoqnize the option: '" + 
 							option.get(0) + "'");
 				}
 			}
 			//Shuffle data
-			List<?> data = dataParser.getData();
+			List<?> data = dataFilter.convert(dataParser.getData());
 			Collections.shuffle(data, new Random(randomValue));
 			List<DataElement<?, ?>> training = (List<DataElement<?, ?>>) data.subList(0, (int)(data.size() - data.size()*percentage));
 			List<DataElement<?, ?>> test = (List<DataElement<?, ?>>) data.subList((int)(data.size() - data.size()*percentage), data.size());
@@ -156,11 +184,12 @@ public class UserInterface {
 
 		}else{
 			String classy = "--" + CLASSIFIER_STRING + " classname " +
-			"numberOfClassifiers [options]";
+			"numberOfClassifiers filter [options]";
 			System.out.println("Usage:");
 			System.out.println("java " + UserInterface.class.getName() + 
-					" --" + GLOBAL_OPTIONS + " percentageOfTestData randomKey" +
-					" --" + FILE_STRING + " filereader name " +
+					" [--" + GLOBAL_OPTIONS + " percentageOfTestData randomKey]" +
+					" --" + FILE_STRING + " filereader name" +
+					" --" + FILTER_STRING + " filter" +
 					classy +
 					" [" + classy + "]");
 		}

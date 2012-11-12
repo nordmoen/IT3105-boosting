@@ -1,30 +1,38 @@
 package no.ntnu.ai.classifiers.nbc;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ProbGiven<T> {
-	private final Map<T, Double> avg;
-	private final Map<T, Double> vari;
+import no.ntnu.ai.data.DataElement;
+
+public class ProbGiven<T, T2> {
+	private final List<DataElement<T, T2>> instances;
+	private final List<Double> weights;
+	private double wSum = 0.0;
 	
 	ProbGiven(){
-		this.avg = new HashMap<T, Double>();
-		this.vari = new HashMap<T, Double>();
+		this.instances = new ArrayList<DataElement<T, T2>>();
+		this.weights = new ArrayList<Double>();
 	}
 	
-	public void addClassi(T classi, double avg, double stdDev){
-		this.avg.put(classi, avg);
-		this.vari.put(classi, stdDev);
+	public void addClass(DataElement<T, T2> classi, double weight){
+		this.instances.add(classi);
+		this.weights.add(weight);
+		wSum += weight;
 	}
 	
-	public double calc(T classi, double value){
-		double base = 1.0 / (Math.sqrt(2 * Math.PI * this.vari.get(classi)));
-		double exp = -(Math.pow(value - this.avg.get(classi), 2)) / (2 * this.vari.get(classi));
-		return base * Math.exp(exp);
+	public double calc(int attribute, T attVal){
+		double result = 0.0;
+		for(int i = 0; i < this.instances.size(); i++){
+			if(instances.get(i).get(attribute).equals(attVal)){
+				result += this.weights.get(i);
+			}
+		}
+		return result / this.wSum;
 	}
 	
 	@Override
 	public String toString(){
-		return "ProbGiven: " + this.avg +" , "+ this.vari;
+		return "ProbGiven: " + this.wSum +" , "+ this.instances;
 	}
 }
