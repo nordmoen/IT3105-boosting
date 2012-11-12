@@ -26,18 +26,24 @@ public class DTCTools<T extends Number, T2> {
 		return -sum;
 	}
 	
-	public double splitEntropy(int index, List<DataElement<T, T2>> list){
+	public double splitEntropy(int index, List<DataElement<T, T2>> list, 
+			List<Double> weights){
 		Map<T, List<DataElement<T, T2>>> branches = new HashMap<T, List<DataElement<T,T2>>>();
-		for(DataElement<T, T2> dat : list){
-			T classi = dat.get(index);
+		Map<T, Double> branchWeights = new HashMap<T, Double>();
+		double wSum = 0.0;
+		for(int i = 0; i < list.size(); i++){
+			T classi = list.get(i).get(index);
 			if(!branches.containsKey(classi)){
 				branches.put(classi, new ArrayList<DataElement<T,T2>>());
+				branchWeights.put(classi, 0.0);
 			}
-			branches.get(classi).add(dat);
+			wSum += weights.get(i);
+			branches.get(classi).add(list.get(i));
+			branchWeights.put(classi, branchWeights.get(classi) + weights.get(i));
 		}
 		double sum = 0.0;
 		for(T classi : branches.keySet()){
-			sum += ((double)branches.get(classi).size() / list.size()) * this.entropy(branches.get(classi));
+			sum += (branchWeights.get(classi) / wSum) * this.entropy(branches.get(classi));
 		}
 		return sum;
 	}
