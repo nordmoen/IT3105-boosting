@@ -30,6 +30,11 @@ public class ArrayElement<T, T2> extends AbstractList<T> implements DataElement<
 			this.list.add(elem);
 		}
 	}
+	
+	public ArrayElement(List<T> elements, T2 classif){
+		this.classification = classif;
+		this.list.addAll(elements);
+	}
 
 	@Override
 	public boolean contains(Object arg0) {

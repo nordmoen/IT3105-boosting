@@ -25,7 +25,7 @@ public class NBCGenerator<T extends Number, T2> implements Generator<T, T2>{
 			}
 			occurences.put(classi, occurences.get(
 					classi) + 1);
-			aProbs.get(i).addClass(data.get(i), weights.get(i));
+			aProbs.get(classi).addClass(data.get(i), weights.get(i));
 		}
 		for(T2 t : occurences.keySet()){
 			occurences.put(t, occurences.get(t) / occurences.size());

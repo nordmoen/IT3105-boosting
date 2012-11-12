@@ -65,10 +65,10 @@ public class UserInterface {
 		return null;
 	}
 	
-	public static Filter<Object, Object, Object, Object> parseFilter(List<String> options){
+	public static Filter<Object, Object, Object> parseFilter(List<String> options){
 		try {
 			@SuppressWarnings("unchecked")
-			Filter<Object, Object, Object, Object> f = (Filter<Object, Object, Object, Object>) Class.forName(options.get(1)).newInstance();
+			Filter<Object, Object, Object> f = (Filter<Object, Object, Object>) Class.forName(options.get(1)).newInstance();
 			f.initialize(options.subList(2, options.size()));
 			return f;
 		} catch (InstantiationException e) {
@@ -121,7 +121,7 @@ public class UserInterface {
 			List<List<String>> options = parseCommandLine(args);
 			List<List<Generator<?,?>>> classifierGenerators = new ArrayList<List<Generator<?,?>>>();
 			Parser<Object, Object> dataParser = null;
-			Filter<Object, Object, Object, Object> dataFilter = null;
+			Filter<Object, Object, Object> dataFilter = null;
 			double percentage = 0.25;
 			int randomValue = 42;
 			for(List<String> option : options){

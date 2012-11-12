@@ -9,8 +9,8 @@ import java.util.Scanner;
 
 public class EasyReader {
 	public static void main(String[] args) {
-		String filename = "training sets/yeast.txt";
-		int numAtts = 9;
+		String filename = "training sets/glass.txt";
+		int numAtts = 10;
 
 		Double[] minVals = new Double[numAtts];
 		Double[] maxVals = new Double[numAtts];
@@ -20,6 +20,7 @@ public class EasyReader {
 			maxVals[i] = Double.NEGATIVE_INFINITY;
 			avgVals[i] = 0.0;
 		}
+		int numLines = 0;
 		
 		FileInputStream fis;
 		Scanner scan = null;
@@ -28,6 +29,7 @@ public class EasyReader {
 			fis = new FileInputStream(new File(filename));
 			scan = new Scanner(fis);
 			while (scan.hasNextLine()){
+				numLines ++;
 				String[] line = scan.nextLine().split(",");
 				Double[] features = new Double[line.length];
 				for(int i=0; i<line.length; i++){
@@ -38,6 +40,7 @@ public class EasyReader {
 					if(features[i] > maxVals[i]){
 						maxVals[i] = features[i];
 					}
+					avgVals[i] += features[i];
 				}
 			}
 			fis.close();
@@ -48,7 +51,7 @@ public class EasyReader {
 		}
 		
 		for(int i=0; i<numAtts; i++){
-			avgVals[i] = (minVals[i] + maxVals[i]) / 2;
+			avgVals[i] /= numLines;
 		}
 		
 		System.out.println("Maximum Values for each attribute:");
