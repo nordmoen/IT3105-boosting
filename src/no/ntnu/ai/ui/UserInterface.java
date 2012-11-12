@@ -134,7 +134,7 @@ public class UserInterface {
 				AdaBoost<?, ?> boost = new AdaBoost(l, training);
 				List<?> hypos = boost.runBooster();
 				hypotheses.addAll((Collection<? extends Hypothesis>) hypos);
-				System.out.println(hypos.get(0).getClass().getName() + ":");
+				System.out.println(hypos.get(0).getClass().getName() + "(" + hypos.size() + "):");
 				System.out.println("\tTraining avg error: " + boost.getAvg() + 
 						", std dev of error: " + boost.getStdDev());
 			}
@@ -167,12 +167,12 @@ public class UserInterface {
 
 		}else{
 			String classy = "--" + CLASSIFIER_STRING + " classname " +
-			"numberOfClassifiers filter [options]";
+			"numberOfClassifiers [options]";
 			System.out.println("Usage:");
 			System.out.println("java " + UserInterface.class.getName() + 
 					" [--" + GLOBAL_OPTIONS + " percentageOfTestData randomKey]" +
 					" --" + FILE_STRING + " name" +
-					" --" + FILTER_STRING + " filter" +
+					" --" + FILTER_STRING + " filter " +
 					classy +
 					" [" + classy + "]");
 		}

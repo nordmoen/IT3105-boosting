@@ -2,8 +2,10 @@ package no.ntnu.ai.boost;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import no.ntnu.ai.data.DataElement;
 import no.ntnu.ai.hypothesis.Generator;
@@ -15,6 +17,7 @@ public class AdaBoost<T, T2> {
 	private final Map<Integer, Double> weights;
 	private final List<Double> errorList;
 	private boolean hasRun = false;
+	private final double diffClasses;
 	
 	public AdaBoost(List<Generator<T, T2>> generators, List<DataElement<T, T2>> data){
 		this.generators = generators;
@@ -23,21 +26,30 @@ public class AdaBoost<T, T2> {
 		for(int i = 0; i < data.size(); i++){
 			weights.put(i, 1.0/data.size());
 		}
+		Set<T2> classes = new HashSet<T2>();
+		for(DataElement<T, T2> dat : data){
+			classes.add(dat.getClassification());
+		}
+		this.diffClasses = classes.size();
 		errorList = new ArrayList<Double>(data.size());
 	}
 	
 	public List<Hypothesis<T, T2>> runBooster(){
 		List<Hypothesis<T, T2>> hypotheses = new ArrayList<Hypothesis<T,T2>>();
-		for(Generator<T, T2> g : this.generators){
+		for(int i = 0; i < this.generators.size(); i++){
+			Generator<T, T2> g = this.generators.get(i);
 			Hypothesis<T, T2> current = g.generateHypothesis(this.data, this.weights);
-			updateWeights(current);
-			hypotheses.add(current);
+			if(updateWeights(current)){
+				hypotheses.add(current);
+			}else{
+				i--;
+			}
 		}
 		hasRun = true;
 		return hypotheses;
 	}
 	
-	private void updateWeights(Hypothesis<T, T2> h){
+	private boolean updateWeights(Hypothesis<T, T2> h){
 		double error = 0;
 		for(int i = 0; i < this.weights.size(); i++){
 			DataElement<T, T2> d = data.get(i);
@@ -45,10 +57,14 @@ public class AdaBoost<T, T2> {
 				error += weights.get(i);
 			}
 		}
+		if(error > (this.diffClasses -1) / this.diffClasses){
+			return false;
+		}
 		for(int i = 0; i < this.weights.size(); i++){
 			DataElement<T, T2> d = data.get(i);
 			if(h.classify(d).equals(d.getClassification())){
-				this.weights.put(i, this.weights.get(i)*(error/(1-error)));
+				this.weights.put(i, this.weights.get(i)*(error/(1-error)*
+						(this.diffClasses-1)));
 			}
 		}
 		double sum = 0;
@@ -60,6 +76,8 @@ public class AdaBoost<T, T2> {
 		}
 		errorList.add(error);
 		h.setWeight(Math.log((1-error)/error)/Math.log(2));
+		
+		return true;
 	}
 	
 	public double getAvg(){
