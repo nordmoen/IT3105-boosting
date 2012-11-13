@@ -57,6 +57,7 @@ public class AdaBoost<T, T2> {
 				error += weights.get(i);
 			}
 		}
+		System.out.println("Error for this classifier: " + error);
 		if(error > (this.diffClasses -1) / this.diffClasses){
 			return false;
 		}

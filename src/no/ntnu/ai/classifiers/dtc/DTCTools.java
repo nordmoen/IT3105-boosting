@@ -27,7 +27,7 @@ public class DTCTools<T extends Number, T2> {
 	}
 	
 	public double splitEntropy(int index, List<DataElement<T, T2>> list, 
-			List<Double> weights){
+			Map<Integer, Double> weights){
 		Map<T, List<DataElement<T, T2>>> branches = new HashMap<T, List<DataElement<T,T2>>>();
 		Map<T, Double> branchWeights = new HashMap<T, Double>();
 		double wSum = 0.0;
