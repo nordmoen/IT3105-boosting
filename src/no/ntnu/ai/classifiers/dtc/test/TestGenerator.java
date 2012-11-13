@@ -2,6 +2,7 @@ package no.ntnu.ai.classifiers.dtc.test;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import no.ntnu.ai.classifiers.dtc.DTCGenerator;
 import no.ntnu.ai.data.DataElement;
 import no.ntnu.ai.file.parser.FileParser;
 import no.ntnu.ai.filter.Filter;
+import no.ntnu.ai.hypothesis.Hypothesis;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -44,7 +46,31 @@ public class TestGenerator {
 	@Test
 	public void testGenerateHypothesis() {
 		DTCGenerator<Integer, Integer> gen = new DTCGenerator<Integer, Integer>();
-		System.out.println(gen.generateHypothesis(data2, weights));
+		Hypothesis<Integer, Integer> h = gen.generateHypothesis(data2, weights);
+		
+		List<Integer> test1 = new ArrayList<Integer>();
+		test1.add(1);
+		test1.add(1);
+		test1.add(1);
+		int res1 = h.classify(test1);
+		assertEquals(1, res1);
+		
+		List<Integer> test2 = new ArrayList<Integer>();
+		test2.add(1);
+		test2.add(1);
+		test2.add(3);
+		int res2 = h.classify(test2);
+		assertEquals(1, res2);
+	}
+	
+	@Test
+	public void testMaxDepth(){
+		DTCGenerator<Integer, Integer> gen = new DTCGenerator<Integer, Integer>();
+		List<String> options = new ArrayList<String>();
+		options.add("2");
+		gen.initialize(options);
+		Hypothesis<Integer, Integer> h = gen.generateHypothesis(data2, weights);
+		System.out.println(h);
 	}
 
 }

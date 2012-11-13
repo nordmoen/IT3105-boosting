@@ -54,7 +54,7 @@ public class DTCGenerator<T extends Number, T2> implements Generator<T, T2>{
 			}
 		}
 
-		Node<T, T2> start = new Node<T, T2>(-1, null);
+		Node<T, T2> start = new Node<T, T2>(-1, null, this.defaultClassi);
 
 
 		return createTree(start, data, weights, used, 0, possVals);
@@ -70,6 +70,9 @@ public class DTCGenerator<T extends Number, T2> implements Generator<T, T2>{
 	private Node<T, T2> createTree(Node<T, T2> current, List<DataElement<T, T2>> data,
 			Map<Integer, Double> weights, boolean[] used, int depth,
 			Map<Integer, Set<T>> possVals){
+		if(data == null){
+			return new Node<T, T2>(-1, this.defaultClassi, this.defaultClassi);
+		}
 		double minVal = Double.POSITIVE_INFINITY;
 		int index = -1;
 		for(int j=0; j<used.length; j++){
@@ -86,9 +89,6 @@ public class DTCGenerator<T extends Number, T2> implements Generator<T, T2>{
 			T2 classi = null;
 			double maxWeight = 0.0;
 			Map<T2, Double> weightSums= new HashMap<T2, Double>();
-			if(data == null){
-				return new Node<T, T2>(-1, this.defaultClassi);
-			}
 			for(int k = 0; k<data.size(); k++){
 				T2 classific = data.get(k).getClassification();
 				if(!weightSums.containsKey(classific)){
@@ -102,7 +102,7 @@ public class DTCGenerator<T extends Number, T2> implements Generator<T, T2>{
 					classi = key;
 				}
 			}
-			return new Node<T, T2>(-1, classi);
+			return new Node<T, T2>(-1, classi, this.defaultClassi);
 		}else{
 			current.setIndex(index);
 			used[index] = true;
@@ -116,7 +116,7 @@ public class DTCGenerator<T extends Number, T2> implements Generator<T, T2>{
 				}
 			}
 			if(equals){
-				return new Node<T, T2>(-1, tmp);
+				return new Node<T, T2>(-1, tmp, this.defaultClassi);
 			}
 
 			Map<T, List<DataElement<T, T2>>> valMap = new HashMap<T, List<DataElement<T,T2>>>();
@@ -134,7 +134,7 @@ public class DTCGenerator<T extends Number, T2> implements Generator<T, T2>{
 			}
 			for(T val : possVals.get(index)){
 				boolean[] childUsed = used.clone();
-				current.addChild(val, createTree(new Node<T, T2>(-1, null), valMap.get(val),
+				current.addChild(val, createTree(new Node<T, T2>(-1, null, this.defaultClassi), valMap.get(val),
 						weightMap.get(val), childUsed, depth+1, possVals));
 			}
 		}
