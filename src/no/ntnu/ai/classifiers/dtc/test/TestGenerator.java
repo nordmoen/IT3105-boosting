@@ -1,6 +1,6 @@
 package no.ntnu.ai.classifiers.dtc.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import no.ntnu.ai.classifiers.dtc.DTCGenerator;
+import no.ntnu.ai.classifiers.dtc.Node;
 import no.ntnu.ai.data.DataElement;
 import no.ntnu.ai.file.parser.FileParser;
 import no.ntnu.ai.filter.Filter;
@@ -18,9 +19,7 @@ import org.junit.Test;
 
 public class TestGenerator {
 	private static List<DataElement<Integer, Integer>> data2;
-	private static List<DataElement<Integer, Integer>> data;
 	private static Map<Integer, Double> weights;
-	private static Map<Integer, Double> w2;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -47,14 +46,14 @@ public class TestGenerator {
 	public void testGenerateHypothesis() {
 		DTCGenerator<Integer, Integer> gen = new DTCGenerator<Integer, Integer>();
 		Hypothesis<Integer, Integer> h = gen.generateHypothesis(data2, weights);
-		
+
 		List<Integer> test1 = new ArrayList<Integer>();
 		test1.add(1);
 		test1.add(1);
 		test1.add(1);
 		int res1 = h.classify(test1);
 		assertEquals(1, res1);
-		
+
 		List<Integer> test2 = new ArrayList<Integer>();
 		test2.add(1);
 		test2.add(1);
@@ -62,15 +61,18 @@ public class TestGenerator {
 		int res2 = h.classify(test2);
 		assertEquals(1, res2);
 	}
-	
+
 	@Test
 	public void testMaxDepth(){
-		DTCGenerator<Integer, Integer> gen = new DTCGenerator<Integer, Integer>();
-		List<String> options = new ArrayList<String>();
-		options.add("2");
-		gen.initialize(options);
-		Hypothesis<Integer, Integer> h = gen.generateHypothesis(data2, weights);
-		System.out.println(h);
+		for(int i = 1; i < data2.get(0).size(); i++){
+			DTCGenerator<Integer, Integer> gen = new DTCGenerator<Integer, Integer>();
+			List<String> options = new ArrayList<String>();
+			options.add("" + i);
+			gen.initialize(options);
+			Hypothesis<Integer, Integer> h = gen.generateHypothesis(data2, weights);
+			Node<Integer, Integer> n = (Node<Integer, Integer>) h;
+			assertEquals(i, n.size());
+		}
 	}
 
 }
