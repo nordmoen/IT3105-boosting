@@ -37,6 +37,7 @@ public class AdaBoost<T, T2> {
 	public List<Hypothesis<T, T2>> runBooster(){
 		List<Hypothesis<T, T2>> hypotheses = new ArrayList<Hypothesis<T,T2>>();
 		for(int i = 0; i < this.generators.size(); i++){
+			System.out.println(this.generators.get(i).getClass().toString() + " # " + (i+1) + "/" + this.generators.size());
 			Generator<T, T2> g = this.generators.get(i);
 			Hypothesis<T, T2> current = g.generateHypothesis(this.data, this.weights);
 			if(updateWeights(current)){
