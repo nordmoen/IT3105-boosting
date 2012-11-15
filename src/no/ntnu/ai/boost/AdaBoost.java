@@ -53,12 +53,14 @@ public class AdaBoost<T, T2> {
 
 	private boolean updateWeights(Hypothesis<T, T2> h){
 		double error = 0;
+		double avgError = 0.0;
 		double beta = 1.5;
 
 		for(int i = 0; i < this.weights.size(); i++){
 			DataElement<T, T2> d = data.get(i);
 			if(!h.classify(d).equals(d.getClassification())){
 				error += weights.get(i);
+				avgError++;
 			}
 		}
 		if(error > (this.diffClasses -1) / this.diffClasses){
@@ -83,7 +85,7 @@ public class AdaBoost<T, T2> {
 			if(!errorMap.containsKey(boosterName)){
 				errorMap.put(boosterName, new ArrayList<Double>());
 			}
-			errorMap.get(boosterName).add(error);
+			errorMap.get(boosterName).add(avgError / data.size());
 
 			h.setWeight(Math.log(((1-error)/error) * (this.diffClasses-1)));
 		}else{
@@ -130,10 +132,6 @@ public class AdaBoost<T, T2> {
 	}
 
 	public double getStdDev(String booster){
-		if(!hasRun){
-			throw new RuntimeException("Adaboost algorithm must run before " +
-					"calculating average");
-		}
 		double sum = 0.0;
 		double avg = this.getAvg(booster);
 		List<Double> errorList = this.errorMap.get(booster);
