@@ -85,7 +85,7 @@ public class DTCGenerator<T extends Number, T2> implements Generator<T, T2>{
 			}
 		}
 
-		if(depth == this.maxDepth || data.size() == 1){
+		if(depth == this.maxDepth || data.size() == 1 || index == -1){
 			T2 classi = null;
 			double maxWeight = 0.0;
 			Map<T2, Double> weightSums= new HashMap<T2, Double>();
