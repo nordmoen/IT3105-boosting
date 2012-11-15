@@ -18,7 +18,7 @@ public class AdaBoost<T, T2> {
 	private final Map<String, List<Double>> errorMap;
 	private boolean hasRun = false;
 	private final double diffClasses;
-	
+
 	public AdaBoost(List<Generator<T, T2>> generators, List<DataElement<T, T2>> data){
 		this.generators = generators;
 		this.data = data;
@@ -33,7 +33,7 @@ public class AdaBoost<T, T2> {
 		this.diffClasses = classes.size();
 		errorMap = new HashMap<String, List<Double>>();
 	}
-	
+
 	public List<Hypothesis<T, T2>> runBooster(){
 		List<Hypothesis<T, T2>> hypotheses = new ArrayList<Hypothesis<T,T2>>();
 		for(int i = 0; i < this.generators.size(); i++){
@@ -43,16 +43,18 @@ public class AdaBoost<T, T2> {
 			if(updateWeights(current)){
 				hypotheses.add(current);
 			}else{
-				System.out.println("Discarded classifier when updating weights");
+				System.err.println("Discarded classifier when updating weights");
 				i--;
 			}
 		}
 		hasRun = true;
 		return hypotheses;
 	}
-	
+
 	private boolean updateWeights(Hypothesis<T, T2> h){
 		double error = 0;
+		double beta = 1.5;
+
 		for(int i = 0; i < this.weights.size(); i++){
 			DataElement<T, T2> d = data.get(i);
 			if(!h.classify(d).equals(d.getClassification())){
@@ -60,38 +62,60 @@ public class AdaBoost<T, T2> {
 			}
 		}
 		if(error > (this.diffClasses -1) / this.diffClasses){
+			this.jiggleWeights(beta);
 			return false;
-		}
-		for(int i = 0; i < this.weights.size(); i++){
-			DataElement<T, T2> d = data.get(i);
-			if(h.classify(d).equals(d.getClassification())){
-				this.weights.put(i, this.weights.get(i)*(error/(1-error)*
-						(this.diffClasses-1)));
+		}else if(0 < error && error < (this.diffClasses - 1)/this.diffClasses){
+			for(int i = 0; i < this.weights.size(); i++){
+				DataElement<T, T2> d = data.get(i);
+				if(!h.classify(d).equals(d.getClassification())){
+					this.weights.put(i, this.weights.get(i)*((1-error)/error)*
+							(this.diffClasses-1));
+				}
 			}
+
+			double sum = this.weightSum();
+
+			for(int classi : weights.keySet()){
+				this.weights.put(classi, weights.get(classi)/sum);
+			}
+
+			String boosterName = h.getClass().getName();
+			if(!errorMap.containsKey(boosterName)){
+				errorMap.put(boosterName, new ArrayList<Double>());
+			}
+			errorMap.get(boosterName).add(error);
+
+			h.setWeight(Math.log(((1-error)/error) * (this.diffClasses-1)));
+		}else{
+			System.err.println("Error is 0");
+			this.jiggleWeights(beta);
+			h.setWeight(10 + Math.log(this.diffClasses - 1));
 		}
+
+		return true;
+	}
+
+	private double weightSum(){
 		double sum = 0;
 		for(Double w : this.weights.values()){
 			sum += w;
 		}
-		for(int classi : weights.keySet()){
-			this.weights.put(classi, weights.get(classi)/sum);
-		}
-		
-		String boosterName = h.getClass().getName();
-		if(!errorMap.containsKey(boosterName)){
-			errorMap.put(boosterName, new ArrayList<Double>());
-		}
-		errorMap.get(boosterName).add(error);
-		
-		h.setWeight(Math.log((1-error)/error)/Math.log(2));
-		
-		if(error == 0){
-			System.err.println("Error equals 0");
-		}
-		
-		return true;
+		return sum;
 	}
-	
+
+	private void jiggleWeights(double beta){
+		double nBeta = 1/Math.pow(this.data.size(), beta);
+		double random = Math.random()*(2*nBeta) - nBeta;
+		for(int i = 0; i < this.weights.size(); i++){
+			this.weights.put(i, Math.max(0, this.weights.get(i) + random));
+		}
+
+		double sum = this.weightSum();
+		for(int i = 0; i < this.weights.size(); i++){
+			this.weights.put(i, this.weights.get(i)/sum);
+		}
+	}
+
 	public double getAvg(String booster){
 		if(!hasRun){
 			throw new RuntimeException("Adaboost algorithm must run before " +
@@ -104,7 +128,7 @@ public class AdaBoost<T, T2> {
 		}
 		return sum / errorList.size();
 	}
-	
+
 	public double getStdDev(String booster){
 		if(!hasRun){
 			throw new RuntimeException("Adaboost algorithm must run before " +
