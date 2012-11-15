@@ -87,7 +87,7 @@ public class DTCGenerator<T extends Number, T2> implements Generator<T, T2>{
 
 		if(depth == this.maxDepth || data.size() == 1 || index == -1){
 			T2 classi = null;
-			double maxWeight = 0.0;
+			double maxWeight = -1;
 			Map<T2, Double> weightSums= new HashMap<T2, Double>();
 			for(int k = 0; k<data.size(); k++){
 				T2 classific = data.get(k).getClassification();
