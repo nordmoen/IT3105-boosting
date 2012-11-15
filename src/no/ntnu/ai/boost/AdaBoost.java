@@ -15,7 +15,7 @@ public class AdaBoost<T, T2> {
 	private final List<Generator<T, T2>> generators;
 	private final List<DataElement<T, T2>> data;
 	private final Map<Integer, Double> weights;
-	private final List<Double> errorList;
+	private final Map<String, List<Double>> errorMap;
 	private boolean hasRun = false;
 	private final double diffClasses;
 	
@@ -31,7 +31,7 @@ public class AdaBoost<T, T2> {
 			classes.add(dat.getClassification());
 		}
 		this.diffClasses = classes.size();
-		errorList = new ArrayList<Double>(data.size());
+		errorMap = new HashMap<String, List<Double>>();
 	}
 	
 	public List<Hypothesis<T, T2>> runBooster(){
@@ -75,31 +75,43 @@ public class AdaBoost<T, T2> {
 		for(int classi : weights.keySet()){
 			this.weights.put(classi, weights.get(classi)/sum);
 		}
-		errorList.add(error);
+		
+		String boosterName = h.getClass().getName();
+		if(!errorMap.containsKey(boosterName)){
+			errorMap.put(boosterName, new ArrayList<Double>());
+		}
+		errorMap.get(boosterName).add(error);
+		
 		h.setWeight(Math.log((1-error)/error)/Math.log(2));
+		
+		if(error == 0){
+			System.err.println("Error equals 0");
+		}
 		
 		return true;
 	}
 	
-	public double getAvg(){
+	public double getAvg(String booster){
 		if(!hasRun){
 			throw new RuntimeException("Adaboost algorithm must run before " +
 					"calculating average");
 		}
 		double sum = 0.0;
+		List<Double> errorList = this.errorMap.get(booster);
 		for(Double d : errorList){
 			sum += d;
 		}
 		return sum / errorList.size();
 	}
 	
-	public double getStdDev(){
+	public double getStdDev(String booster){
 		if(!hasRun){
 			throw new RuntimeException("Adaboost algorithm must run before " +
 					"calculating average");
 		}
 		double sum = 0.0;
-		double avg = this.getAvg();
+		double avg = this.getAvg(booster);
+		List<Double> errorList = this.errorMap.get(booster);
 		for(Double d : errorList){
 			sum += Math.pow(d - avg, 2);
 		}

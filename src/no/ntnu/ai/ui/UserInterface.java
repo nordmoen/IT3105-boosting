@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 import no.ntnu.ai.boost.AdaBoost;
 import no.ntnu.ai.data.DataElement;
@@ -46,7 +48,7 @@ public class UserInterface {
 		}
 		return null;
 	}
-	
+
 	public static Filter<Object, Object> parseFilter(List<String> options){
 		try {
 			@SuppressWarnings("unchecked")
@@ -101,14 +103,14 @@ public class UserInterface {
 	public static void main(String[] args) {
 		if(args.length > 1 && !args[0].equalsIgnoreCase("--help")){
 			List<List<String>> options = parseCommandLine(args);
-			List<List<Generator<?,?>>> classifierGenerators = new ArrayList<List<Generator<?,?>>>();
+			List<Generator<?,?>> classifierGenerators = new ArrayList<Generator<?,?>>();
 			Parser<String, String> dataParser = null;
 			Filter<Object, Object> dataFilter = null;
 			double percentage = 0.25;
 			int randomValue = 42;
 			for(List<String> option : options){
 				if(option.get(0).equalsIgnoreCase(CLASSIFIER_STRING)){
-					classifierGenerators.add(parseClassifier(option));
+					classifierGenerators.addAll(parseClassifier(option));
 				}else if(option.get(0).equalsIgnoreCase(FILE_STRING)){
 					dataParser = new FileParser();
 					dataParser.initialize(option.get(1));
@@ -129,16 +131,28 @@ public class UserInterface {
 			List<DataElement<?, ?>> test = (List<DataElement<?, ?>>) data.subList((int)(data.size() - data.size()*percentage), data.size());
 			//Use adaboost to obtain result:
 
+			Collections.shuffle(classifierGenerators, new Random(randomValue));
 			List<Hypothesis> hypotheses = new ArrayList();
-			for(List<Generator<?, ?>> l : classifierGenerators){
-				AdaBoost<?, ?> boost = new AdaBoost(l, training);
-				List<?> hypos = boost.runBooster();
-				hypotheses.addAll((Collection<? extends Hypothesis>) hypos);
-				System.out.println(hypos.get(0).getClass().getName() + "(" + hypos.size() + "):");
-				System.out.println("\tTraining avg error: " + boost.getAvg() + 
-						", std dev of error: " + boost.getStdDev());
+			AdaBoost<?, ?> boost = new AdaBoost(classifierGenerators, training);
+			List<?> hypos = boost.runBooster();
+			hypotheses.addAll((Collection<? extends Hypothesis>) hypos);
+			
+			Map<String, Integer> boosterCount = new HashMap<String, Integer>();
+			for(Hypothesis<Object, Object> h : hypotheses){
+				String name = h.getClass().getName();
+				if(!boosterCount.containsKey(name)){
+					boosterCount.put(name, 0);
+				}
+				boosterCount.put(name, boosterCount.get(name) + 1);
 			}
 			
+			for(String s : boosterCount.keySet()){
+				System.out.println(s + "(" + boosterCount.get(s) + "):");
+				System.out.println("\tTraining avg error: " + boost.getAvg(s) + 
+						", std dev of error: " + boost.getStdDev(s));
+			}
+
+
 			System.out.println("");
 			int error = 0;
 			for(DataElement dat : test){
@@ -169,7 +183,7 @@ public class UserInterface {
 
 		}else{
 			String classy = "--" + CLASSIFIER_STRING + " classname " +
-			"numberOfClassifiers [options]";
+					"numberOfClassifiers [options]";
 			System.out.println("Usage:");
 			System.out.println("java " + UserInterface.class.getName() + 
 					" [--" + GLOBAL_OPTIONS + " percentageOfTestData randomKey]" +
