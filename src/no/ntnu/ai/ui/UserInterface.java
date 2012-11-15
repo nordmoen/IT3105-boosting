@@ -106,8 +106,8 @@ public class UserInterface {
 			List<Generator<?,?>> classifierGenerators = new ArrayList<Generator<?,?>>();
 			Parser<String, String> dataParser = null;
 			Filter<Object, Object> dataFilter = null;
-			double percentage = 0.25;
-			int randomValue = 42;
+			double percentage = 0.2;
+			int randomValue = (int) System.currentTimeMillis();
 			for(List<String> option : options){
 				if(option.get(0).equalsIgnoreCase(CLASSIFIER_STRING)){
 					classifierGenerators.addAll(parseClassifier(option));
@@ -115,8 +115,9 @@ public class UserInterface {
 					dataParser = new FileParser();
 					dataParser.initialize(option.get(1));
 				}else if(option.get(0).equalsIgnoreCase(GLOBAL_OPTIONS)){
-					percentage = Double.parseDouble(option.get(1));
-					randomValue = Integer.parseInt(option.get(2));
+					percentage = (option.size() > 1 ? Double.parseDouble(option.get(1)) : 0.2);
+					randomValue = (option.size() > 2 ? Integer.parseInt(option.get(2)) :
+						(int)System.currentTimeMillis());
 				}else if(option.get(0).equalsIgnoreCase(FILTER_STRING)){
 					dataFilter = parseFilter(option);
 				}else{
