@@ -163,7 +163,9 @@ public class UserInterface {
 					error ++;
 				}
 			}
-			System.out.println("Test error: " + error + " of " + test.size());
+			int posError = (int) (((double)error / test.size()) * 100);
+			System.out.println("Test error: " + error + " of " + test.size() + 
+					" (" + posError + "%)");
 
 		}else{
 			String classy = "--" + CLASSIFIER_STRING + " classname " +
