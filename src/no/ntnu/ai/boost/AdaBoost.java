@@ -42,6 +42,7 @@ public class AdaBoost<T, T2> {
 			if(updateWeights(current)){
 				hypotheses.add(current);
 			}else{
+				System.out.println("Discarded classifier when updating weights");
 				i--;
 			}
 		}
