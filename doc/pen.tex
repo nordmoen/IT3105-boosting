@@ -1,0 +1,37 @@
+\subsection{Pen Digit Dataset}\label{pen digit dataset}
+This dataset represents the classification of digits written by different writers.
+
+To run, use these options with the classifier options wanted.
+
+\begin{lstlisting}[label=lst:pen, caption=Pen digit dataset general options]
+--global 0.2 42 --file pen-digits.txt --filter no.ntnu.ai.filter.PenDigitsFilter
+\end{lstlisting}
+
+\begin{landscape}
+\begin{table}
+\begin{tabular}{|c|c|c||c|c|c||c||p{5cm}|}
+\hline
+NBC \# & Training Error & Standard Deviation & DTC \# & Training Error
+& Standard Deviation & Test Error & Classifier option \\ \hline
+1 & 0.119 & N/A & 0 & N/A & N/A & 251/2199(11\%) & NBCGenerator 1 \\ \hline
+0 & N/A & N/A & 1 & 0.0 & N/A & 252/2119(2\%) & DTCGenerator 1 \\ \hline
+5 & 0.314 & 0.106 & 0 & N/A & N/A & 248/2199(11\%) & NBCGenerator 5 \\ \hline
+10 & 0.329 & 0.081 & 0 & N/A & N/A & 239/2119(10\%) & NBCGenerator 10 \\ \hline
+20 & 0.330 & 0.078 & 0 & N/A & N/A & 230/2119(10\%) & NBCGenerator 20 \\ \hline
+0 & N/A & N/A & 5 & 0.0 & 0.0 & 252/2119(11\%) & DTCGenerator 5 \\ \hline
+0 & N/A & N/A & 10 & 0.761 & 0.057 & 1126/2119(55\%) & DTCGenerator 10 1 \\ \hline
+0 & N/A & N/A & 10 & 0.615 & 0.127 & 398/2119(18\%) & DTCGenerator 10 2 \\ \hline
+0 & N/A & N/A & 10 & 0.0 & 0.0 & 252/2119(11\%) & DTCGenerator 10 \\ \hline
+0 & N/A & N/A & 20 & 0.0 & 0.0 & 252/2119(11\%)& DTCGenerator 20 \\ \hline
+5 & 0.289 & 0.086 & 5 & 0.664 & 0.063 & 172/2119(7\%) & DTCGenerator 5 2, 
+\newline NBCGenerator 5 \\ \hline
+10 & 0.351 & 0.049 & 10 & 0.612 & 0.0121 & 196/2119(8\%) & DTCGenerator 10 2, 
+\newline NBCGenerator 10 \\ \hline
+20 & 0.347 & 0.073 & 20 & 0.656 & 0.091 & 174/2119(7\%) & DTCGenerator 20 2, 
+\newline NBCGenerator 20 \\ \hline
+\hline
+\end{tabular}
+\label{tab:nursery}
+\caption{Table showing the results of our classifiers on the Nursery dataset}
+\end{table}
+\end{landscape}
