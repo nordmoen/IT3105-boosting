@@ -7,3 +7,10 @@
 
 #Vim specific:
 *.swp
+
+#Latex:
+*.aux
+*.lof
+*.log
+*.out
+*.toc
