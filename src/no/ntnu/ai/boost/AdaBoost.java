@@ -86,11 +86,6 @@ public class AdaBoost<T, T2> {
 				this.weights.put(classi, weights.get(classi)/sum);
 			}
 
-			String boosterName = h.getClass().getName();
-			if(!errorMap.containsKey(boosterName)){
-				errorMap.put(boosterName, new ArrayList<Double>());
-			}
-			errorMap.get(boosterName).add(avgError / data.size());
 
 			h.setWeight(Math.log(((1-error)/error) * (this.diffClasses-1)));
 		}else{
@@ -98,6 +93,11 @@ public class AdaBoost<T, T2> {
 			this.jiggleWeights(beta);
 			h.setWeight(10 + Math.log(this.diffClasses - 1));
 		}
+		String boosterName = h.getClass().getName();
+		if(!errorMap.containsKey(boosterName)){
+			errorMap.put(boosterName, new ArrayList<Double>());
+		}
+		errorMap.get(boosterName).add(avgError / data.size());
 
 		return true;
 	}

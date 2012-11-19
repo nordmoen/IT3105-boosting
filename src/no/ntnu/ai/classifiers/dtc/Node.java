@@ -99,4 +99,5 @@ public class Node<T, T2> extends Classifier<T, T2>{
 			return max + 1;
 		}
 	}
+	
 }

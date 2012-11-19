@@ -1,0 +1,134 @@
+Error is 0
+--global 0.2 42 --file training_sets/nursery.txt --filter no.ntnu.ai.filter.NurseryFilter --classifier no.ntnu.ai.classifiers.nbc.NBCGenerator 1
+Number of jiggles required: 0
+no.ntnu.ai.classifiers.nbc.NBClassifier(1):
+	Training avg error: 0.09712577160493827, std dev of error: 0.0
+
+Test error: 255 of 2592 (9%), Correct classified: 2337 of 2592 (91%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/nursery.txt --filter no.ntnu.ai.filter.NurseryFilter --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 1
+Number of jiggles required: 1
+no.ntnu.ai.classifiers.dtc.Node(1):
+	Training avg error: 0.0, std dev of error: 0.0
+
+Test error: 76 of 2592 (2%), Correct classified: 2516 of 2592 (98%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/nursery.txt --filter no.ntnu.ai.filter.NurseryFilter --classifier no.ntnu.ai.classifiers.nbc.NBCGenerator 5
+Number of jiggles required: 0
+no.ntnu.ai.classifiers.nbc.NBClassifier(5):
+	Training avg error: 0.23474151234567903, std dev of error: 0.11760749276265943
+
+Test error: 249 of 2592 (9%), Correct classified: 2343 of 2592 (91%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/nursery.txt --filter no.ntnu.ai.filter.NurseryFilter --classifier no.ntnu.ai.classifiers.nbc.NBCGenerator 10
+Number of jiggles required: 2
+no.ntnu.ai.classifiers.nbc.NBClassifier(10):
+	Training avg error: 0.19336419753086423, std dev of error: 0.09458104903599028
+
+Test error: 249 of 2592 (9%), Correct classified: 2343 of 2592 (91%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/nursery.txt --filter no.ntnu.ai.filter.NurseryFilter --classifier no.ntnu.ai.classifiers.nbc.NBCGenerator 20
+Number of jiggles required: 24
+no.ntnu.ai.classifiers.nbc.NBClassifier(20):
+	Training avg error: 0.16139081790123455, std dev of error: 0.07415722924330966
+
+Test error: 249 of 2592 (9%), Correct classified: 2343 of 2592 (91%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/nursery.txt --filter no.ntnu.ai.filter.NurseryFilter --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 5
+Error is 0
+Error is 0
+Error is 0
+Error is 0
+Error is 0
+Number of jiggles required: 5
+no.ntnu.ai.classifiers.dtc.Node(5):
+	Training avg error: 0.0, std dev of error: 0.0
+
+Test error: 76 of 2592 (2%), Correct classified: 2516 of 2592 (98%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/nursery.txt --filter no.ntnu.ai.filter.NurseryFilter --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 10 1
+Number of jiggles required: 0
+no.ntnu.ai.classifiers.dtc.Node(10):
+	Training avg error: 0.3818672839506173, std dev of error: 0.06599243709226811
+
+Test error: 847 of 2592 (32%), Correct classified: 1745 of 2592 (68%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/nursery.txt --filter no.ntnu.ai.filter.NurseryFilter --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 10 2
+Number of jiggles required: 0
+no.ntnu.ai.classifiers.dtc.Node(10):
+	Training avg error: 0.3592785493827161, std dev of error: 0.08095669764406639
+
+Test error: 451 of 2592 (17%), Correct classified: 2141 of 2592 (83%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/nursery.txt --filter no.ntnu.ai.filter.NurseryFilter --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 10
+Error is 0
+Error is 0
+Error is 0
+Error is 0
+Error is 0
+Error is 0
+Error is 0
+Error is 0
+Error is 0
+Error is 0
+Number of jiggles required: 10
+no.ntnu.ai.classifiers.dtc.Node(10):
+	Training avg error: 0.0, std dev of error: 0.0
+
+Test error: 76 of 2592 (2%), Correct classified: 2516 of 2592 (98%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/nursery.txt --filter no.ntnu.ai.filter.NurseryFilter --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 20
+Error is 0
+Error is 0
+Error is 0
+Error is 0
+Error is 0
+Error is 0
+Error is 0
+Error is 0
+Error is 0
+Error is 0
+Error is 0
+Error is 0
+Error is 0
+Error is 0
+Error is 0
+Error is 0
+Error is 0
+Error is 0
+Error is 0
+Error is 0
+Number of jiggles required: 20
+no.ntnu.ai.classifiers.dtc.Node(20):
+	Training avg error: 0.0, std dev of error: 0.0
+
+Test error: 76 of 2592 (2%), Correct classified: 2516 of 2592 (98%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/nursery.txt --filter no.ntnu.ai.filter.NurseryFilter --classifier no.ntnu.ai.classifiers.nbc.NBCGenerator 5 --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 5 2
+Number of jiggles required: 0
+no.ntnu.ai.classifiers.dtc.Node(5):
+	Training avg error: 0.38015046296296295, std dev of error: 0.077072591712862
+no.ntnu.ai.classifiers.nbc.NBClassifier(5):
+	Training avg error: 0.22957175925925927, std dev of error: 0.07470289035645285
+
+Test error: 291 of 2592 (11%), Correct classified: 2301 of 2592 (89%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/nursery.txt --filter no.ntnu.ai.filter.NurseryFilter --classifier no.ntnu.ai.classifiers.nbc.NBCGenerator 10 --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 10 2
+Number of jiggles required: 0
+no.ntnu.ai.classifiers.dtc.Node(10):
+	Training avg error: 0.34876543209876537, std dev of error: 0.07867926811798331
+no.ntnu.ai.classifiers.nbc.NBClassifier(10):
+	Training avg error: 0.19385609567901232, std dev of error: 0.07483060646426742
+
+Test error: 313 of 2592 (12%), Correct classified: 2279 of 2592 (88%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/nursery.txt --filter no.ntnu.ai.filter.NurseryFilter --classifier no.ntnu.ai.classifiers.nbc.NBCGenerator 20 --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 20 2
+Number of jiggles required: 0
+no.ntnu.ai.classifiers.dtc.Node(20):
+	Training avg error: 0.34700038580246917, std dev of error: 0.08550664148833852
+no.ntnu.ai.classifiers.nbc.NBClassifier(20):
+	Training avg error: 0.26888503086419746, std dev of error: 0.03671673200610069
+
+Test error: 338 of 2592 (13%), Correct classified: 2254 of 2592 (87%)
+-----------------------------------------------------------------
+***************************************

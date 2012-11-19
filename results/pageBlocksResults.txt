@@ -1,0 +1,98 @@
+--global 0.2 42 --file training_sets/page-blocks.txt --filter no.ntnu.ai.filter.PageBlocksFilter --classifier no.ntnu.ai.classifiers.nbc.NBCGenerator 1
+Number of jiggles required: 0
+no.ntnu.ai.classifiers.nbc.NBClassifier(1):
+	Training avg error: 0.07149383280036546, std dev of error: 0.0
+
+Test error: 76 of 1095 (6%), Correct classified: 1019 of 1095 (94%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/page-blocks.txt --filter no.ntnu.ai.filter.PageBlocksFilter --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 1
+Number of jiggles required: 0
+no.ntnu.ai.classifiers.dtc.Node(1):
+	Training avg error: 0.010507080858839652, std dev of error: 0.0
+
+Test error: 47 of 1095 (4%), Correct classified: 1048 of 1095 (96%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/page-blocks.txt --filter no.ntnu.ai.filter.PageBlocksFilter --classifier no.ntnu.ai.classifiers.nbc.NBCGenerator 5
+Number of jiggles required: 0
+no.ntnu.ai.classifiers.nbc.NBClassifier(5):
+	Training avg error: 0.15824577432617634, std dev of error: 0.08760431557917459
+
+Test error: 62 of 1095 (5%), Correct classified: 1033 of 1095 (95%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/page-blocks.txt --filter no.ntnu.ai.filter.PageBlocksFilter --classifier no.ntnu.ai.classifiers.nbc.NBCGenerator 10
+Number of jiggles required: 141
+no.ntnu.ai.classifiers.nbc.NBClassifier(10):
+	Training avg error: 0.13359981726815895, std dev of error: 0.07451578761264097
+
+Test error: 67 of 1095 (6%), Correct classified: 1028 of 1095 (94%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/page-blocks.txt --filter no.ntnu.ai.filter.PageBlocksFilter --classifier no.ntnu.ai.classifiers.nbc.NBCGenerator 20
+Number of jiggles required: 273
+no.ntnu.ai.classifiers.nbc.NBClassifier(20):
+	Training avg error: 0.11005025125628139, std dev of error: 0.05772614618745912
+
+Test error: 65 of 1095 (5%), Correct classified: 1030 of 1095 (95%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/page-blocks.txt --filter no.ntnu.ai.filter.PageBlocksFilter --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 5
+Number of jiggles required: 0
+no.ntnu.ai.classifiers.dtc.Node(5):
+	Training avg error: 0.020191868433074463, std dev of error: 0.00970652722632124
+
+Test error: 50 of 1095 (4%), Correct classified: 1045 of 1095 (96%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/page-blocks.txt --filter no.ntnu.ai.filter.PageBlocksFilter --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 10 1
+Number of jiggles required: 0
+no.ntnu.ai.classifiers.dtc.Node(10):
+	Training avg error: 0.5979671082686158, std dev of error: 0.2625293137451211
+
+Test error: 75 of 1095 (6%), Correct classified: 1020 of 1095 (94%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/page-blocks.txt --filter no.ntnu.ai.filter.PageBlocksFilter --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 10 2
+Number of jiggles required: 0
+no.ntnu.ai.classifiers.dtc.Node(10):
+	Training avg error: 0.4849703060758337, std dev of error: 0.1994847246722848
+
+Test error: 61 of 1095 (5%), Correct classified: 1034 of 1095 (95%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/page-blocks.txt --filter no.ntnu.ai.filter.PageBlocksFilter --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 10
+Number of jiggles required: 0
+no.ntnu.ai.classifiers.dtc.Node(10):
+	Training avg error: 0.020922795797167656, std dev of error: 0.008035008082565794
+
+Test error: 47 of 1095 (4%), Correct classified: 1048 of 1095 (96%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/page-blocks.txt --filter no.ntnu.ai.filter.PageBlocksFilter --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 20
+Number of jiggles required: 0
+no.ntnu.ai.classifiers.dtc.Node(20):
+	Training avg error: 0.021459570580173587, std dev of error: 0.005773282945673153
+
+Test error: 50 of 1095 (4%), Correct classified: 1045 of 1095 (96%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/page-blocks.txt --filter no.ntnu.ai.filter.PageBlocksFilter --classifier no.ntnu.ai.classifiers.nbc.NBCGenerator 5 --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 5 2
+Number of jiggles required: 0
+no.ntnu.ai.classifiers.dtc.Node(5):
+	Training avg error: 0.5325719506624029, std dev of error: 0.23434105635733374
+no.ntnu.ai.classifiers.nbc.NBClassifier(5):
+	Training avg error: 0.11087254454088624, std dev of error: 0.02284358144742781
+
+Test error: 66 of 1095 (6%), Correct classified: 1029 of 1095 (94%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/page-blocks.txt --filter no.ntnu.ai.filter.PageBlocksFilter --classifier no.ntnu.ai.classifiers.nbc.NBCGenerator 10 --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 10 2
+Number of jiggles required: 1
+no.ntnu.ai.classifiers.dtc.Node(10):
+	Training avg error: 0.5959798994974875, std dev of error: 0.26677508774397335
+no.ntnu.ai.classifiers.nbc.NBClassifier(10):
+	Training avg error: 0.09506624029237096, std dev of error: 0.0071350290911525805
+
+Test error: 56 of 1095 (5%), Correct classified: 1039 of 1095 (95%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/page-blocks.txt --filter no.ntnu.ai.filter.PageBlocksFilter --classifier no.ntnu.ai.classifiers.nbc.NBCGenerator 20 --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 20 2
+Number of jiggles required: 35
+no.ntnu.ai.classifiers.dtc.Node(20):
+	Training avg error: 0.6780950205573322, std dev of error: 0.17906231729033503
+no.ntnu.ai.classifiers.nbc.NBClassifier(20):
+	Training avg error: 0.09995431703974418, std dev of error: 0.003981499967017074
+
+Test error: 53 of 1095 (4%), Correct classified: 1042 of 1095 (96%)
+-----------------------------------------------------------------
+***************************************
