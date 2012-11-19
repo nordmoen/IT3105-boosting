@@ -2,10 +2,13 @@
 \usepackage[colorlinks=true, linkcolor=black]{hyperref}
 \usepackage{graphicx}
 \usepackage{listings}
+\usepackage{rotating}
+\usepackage[table, dvipsnames]{xcolor}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 
 \newcommand{\adaboost}{AdaBoost}
+\lstset{breaklines=true, frame=single}
 
 \title{
 	\adaboost{} \\
@@ -33,10 +36,13 @@
 \newpage
 \tableofcontents
 %\listoffigures
+\listoftables
 
 \clearpage
 \pagenumbering{arabic}
 
 \input{impl.tex}
+
+\input{result.tex}
 
 \end{document}

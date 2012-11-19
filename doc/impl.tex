@@ -22,4 +22,34 @@ this is only checked at runtime.
 Our data flow starts with reading all lines in a file creating DataElements
 with String values. Then we apply a filter which must implement the interface
 Filter\footnote{no.ntnu.ai.filter.Filter}. After that is done we shuffle the
-dataset using a specified random seed to be able to replicate our tests.
+dataset using a specified random seed to be able to replicate our tests. We
+then split the dataset into a training set and test set with a split specified
+on the command-line. After that we start \adaboost{} and try to classify the
+test set.
+
+The meat of our implementation lies in the Generator class which dictates how
+a specific classifier is created. This is the class which is defined on the
+command-line and this is the class which can be configured from the command-line.
+
+This class must be able to receive a list of options where it can act on each
+option according to its own wishes which is done so we can configure each Generator,
+this is among other things where we pass the depth parameter to the Decision Tree
+Generator.
+
+Each Generator class uses its own logic to create a classifier of the correct type
+based on the given data. This means that \adaboost{} does not know nor care what
+a Generator creates as long as it implements the Hypothesis interface. This also
+means that our implementation is very general. When creating a new classifier type
+one has to implement a new Generator and a new Hypothesis class, which is all. To
+support new datasets one only has to implement a new filter to convert from String
+to a specific type. This was done to decouple the datasets from the classifiers, but
+it also means that we have to implement less code since each classifier shares the
+filters.
+
+The filters are tasked with both converting the String values read from a file to
+the correct format, but it's also tasked with creating buckets for the classifiers.
+With this we mean that the filter must split the values in each file into proper
+buckets since our classifiers can't handle large ranges. This is also the reason
+why we have a filter per dataset. Since we had a hard time creating an algorithm
+for splitting the ranges in different datasets we chose to have it like to for ease
+and to be able to control the buckets in more detail.
