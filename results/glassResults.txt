@@ -1,0 +1,98 @@
+--global 0.2 42 --file training_sets/glass.txt --filter no.ntnu.ai.filter.GlassFilter --classifier no.ntnu.ai.classifiers.nbc.NBCGenerator 1
+Number of jiggles required: 0
+no.ntnu.ai.classifiers.nbc.NBClassifier(1):
+	Training avg error: 0.3391812865497076, std dev of error: 0.0
+
+Test error: 18 of 43 (41%), Correct classified: 25 of 43 (59%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/glass.txt --filter no.ntnu.ai.filter.GlassFilter --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 1
+Number of jiggles required: 0
+no.ntnu.ai.classifiers.dtc.Node(1):
+	Training avg error: 0.18128654970760233, std dev of error: 0.0
+
+Test error: 17 of 43 (39%), Correct classified: 26 of 43 (61%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/glass.txt --filter no.ntnu.ai.filter.GlassFilter --classifier no.ntnu.ai.classifiers.nbc.NBCGenerator 5
+Number of jiggles required: 0
+no.ntnu.ai.classifiers.nbc.NBClassifier(5):
+	Training avg error: 0.3906432748538011, std dev of error: 0.04505581353042858
+
+Test error: 19 of 43 (44%), Correct classified: 24 of 43 (56%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/glass.txt --filter no.ntnu.ai.filter.GlassFilter --classifier no.ntnu.ai.classifiers.nbc.NBCGenerator 10
+Number of jiggles required: 11
+no.ntnu.ai.classifiers.nbc.NBClassifier(10):
+	Training avg error: 0.3707602339181287, std dev of error: 0.04242890560752527
+
+Test error: 19 of 43 (44%), Correct classified: 24 of 43 (56%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/glass.txt --filter no.ntnu.ai.filter.GlassFilter --classifier no.ntnu.ai.classifiers.nbc.NBCGenerator 20
+Number of jiggles required: 34
+no.ntnu.ai.classifiers.nbc.NBClassifier(20):
+	Training avg error: 0.35760233918128653, std dev of error: 0.03421302534982004
+
+Test error: 20 of 43 (46%), Correct classified: 23 of 43 (54%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/glass.txt --filter no.ntnu.ai.filter.GlassFilter --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 5
+Number of jiggles required: 0
+no.ntnu.ai.classifiers.dtc.Node(5):
+	Training avg error: 0.256140350877193, std dev of error: 0.04271808740994076
+
+Test error: 18 of 43 (41%), Correct classified: 25 of 43 (59%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/glass.txt --filter no.ntnu.ai.filter.GlassFilter --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 10 1
+Number of jiggles required: 0
+no.ntnu.ai.classifiers.dtc.Node(10):
+	Training avg error: 0.6730994152046784, std dev of error: 0.13277429742087454
+
+Test error: 23 of 43 (53%), Correct classified: 20 of 43 (47%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/glass.txt --filter no.ntnu.ai.filter.GlassFilter --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 10 2
+Number of jiggles required: 0
+no.ntnu.ai.classifiers.dtc.Node(10):
+	Training avg error: 0.6228070175438597, std dev of error: 0.12378474616690543
+
+Test error: 24 of 43 (55%), Correct classified: 19 of 43 (45%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/glass.txt --filter no.ntnu.ai.filter.GlassFilter --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 10
+Number of jiggles required: 0
+no.ntnu.ai.classifiers.dtc.Node(10):
+	Training avg error: 0.2654970760233918, std dev of error: 0.047234667851014434
+
+Test error: 18 of 43 (41%), Correct classified: 25 of 43 (59%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/glass.txt --filter no.ntnu.ai.filter.GlassFilter --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 20
+Number of jiggles required: 0
+no.ntnu.ai.classifiers.dtc.Node(20):
+	Training avg error: 0.26754385964912275, std dev of error: 0.041675642820976
+
+Test error: 19 of 43 (44%), Correct classified: 24 of 43 (56%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/glass.txt --filter no.ntnu.ai.filter.GlassFilter --classifier no.ntnu.ai.classifiers.nbc.NBCGenerator 5 --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 5 2
+Number of jiggles required: 0
+no.ntnu.ai.classifiers.dtc.Node(5):
+	Training avg error: 0.6514619883040935, std dev of error: 0.09534854139035705
+no.ntnu.ai.classifiers.nbc.NBClassifier(5):
+	Training avg error: 0.4292397660818713, std dev of error: 0.04568894733245523
+
+Test error: 21 of 43 (48%), Correct classified: 22 of 43 (52%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/glass.txt --filter no.ntnu.ai.filter.GlassFilter --classifier no.ntnu.ai.classifiers.nbc.NBCGenerator 10 --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 10 2
+Number of jiggles required: 6
+no.ntnu.ai.classifiers.dtc.Node(10):
+	Training avg error: 0.6456140350877193, std dev of error: 0.1045197923403457
+no.ntnu.ai.classifiers.nbc.NBClassifier(10):
+	Training avg error: 0.3906432748538011, std dev of error: 0.044213001570610054
+
+Test error: 17 of 43 (39%), Correct classified: 26 of 43 (61%)
+-----------------------------------------------------------------
+--global 0.2 42 --file training_sets/glass.txt --filter no.ntnu.ai.filter.GlassFilter --classifier no.ntnu.ai.classifiers.nbc.NBCGenerator 20 --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 20 2
+Number of jiggles required: 1
+no.ntnu.ai.classifiers.dtc.Node(20):
+	Training avg error: 0.6608187134502923, std dev of error: 0.09279653338084976
+no.ntnu.ai.classifiers.nbc.NBClassifier(20):
+	Training avg error: 0.40906432748538013, std dev of error: 0.04887416186031188
+
+Test error: 22 of 43 (51%), Correct classified: 21 of 43 (49%)
+-----------------------------------------------------------------
+***************************************
