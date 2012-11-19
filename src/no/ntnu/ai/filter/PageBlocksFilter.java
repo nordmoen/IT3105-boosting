@@ -15,7 +15,7 @@ public class PageBlocksFilter extends AbstractFilter<Integer, Integer, Double>{
 	}
 
 	@Override
-	protected Integer val0(Double val) {
+	protected Integer val00(Double val) {
 		if(val<2) return 1;
 		if(val<5) return 2;
 		if(val<8) return 3;
@@ -28,7 +28,7 @@ public class PageBlocksFilter extends AbstractFilter<Integer, Integer, Double>{
 	}
 
 	@Override
-	protected Integer val1(Double val) {
+	protected Integer val01(Double val) {
 		if(val<50) return 1;
 		if(val<90) return 2;
 		if(val<150) return 3;
@@ -38,7 +38,7 @@ public class PageBlocksFilter extends AbstractFilter<Integer, Integer, Double>{
 
 
 	@Override
-	protected Integer val2(Double val) {
+	protected Integer val02(Double val) {
 		if(val<300) return 1;
 		if(val<500) return 2;
 		if(val<800) return 3;
@@ -51,7 +51,7 @@ public class PageBlocksFilter extends AbstractFilter<Integer, Integer, Double>{
 	}
 
 	@Override
-	protected Integer val3(Double val) {
+	protected Integer val03(Double val) {
 		if(val<4) return 1;
 		if(val<8) return 2;
 		if(val<13) return 3;
@@ -64,7 +64,7 @@ public class PageBlocksFilter extends AbstractFilter<Integer, Integer, Double>{
 	}
 
 	@Override
-	protected Integer val4(Double val) {
+	protected Integer val04(Double val) {
 		if(val<0.1) return 1;
 		if(val<0.2) return 2;
 		if(val<0.3) return 3;
@@ -77,7 +77,7 @@ public class PageBlocksFilter extends AbstractFilter<Integer, Integer, Double>{
 	}
 
 	@Override
-	protected Integer val5(Double val) {
+	protected Integer val05(Double val) {
 		if(val<0.15) return 1;
 		if(val<0.3) return 2;
 		if(val<0.4) return 3;
@@ -90,7 +90,7 @@ public class PageBlocksFilter extends AbstractFilter<Integer, Integer, Double>{
 	}
 
 	@Override
-	protected Integer val6(Double val) {
+	protected Integer val06(Double val) {
 		if(val<2) return 1;
 		if(val<4) return 2;
 		if(val<7) return 3;
@@ -103,7 +103,7 @@ public class PageBlocksFilter extends AbstractFilter<Integer, Integer, Double>{
 	}
 
 	@Override
-	protected Integer val7(Double val) {
+	protected Integer val07(Double val) {
 		if(val<60) return 1;
 		if(val<140) return 2;
 		if(val<220) return 3;
@@ -119,7 +119,7 @@ public class PageBlocksFilter extends AbstractFilter<Integer, Integer, Double>{
 	}
 
 	@Override
-	protected Integer val8(Double val) {
+	protected Integer val08(Double val) {
 		if(val<250) return 1;
 		if(val<400) return 2;
 		if(val<550) return 3;
@@ -133,7 +133,7 @@ public class PageBlocksFilter extends AbstractFilter<Integer, Integer, Double>{
 	}
 
 	@Override
-	protected Integer val9(Double val) {
+	protected Integer val09(Double val) {
 		if(val<30) return 1;
 		if(val<60) return 2;
 		if(val<80) return 3;
@@ -178,6 +178,24 @@ public class PageBlocksFilter extends AbstractFilter<Integer, Integer, Double>{
 	
 	@Override
 	protected Integer val14(Double val) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Integer val15(Double val) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Integer val16(Double val) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Integer val17(Double val) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -15,7 +15,7 @@ public class YeastFilter extends AbstractFilter<Integer, Integer, Double>{
 	}
 
 	@Override
-	protected Integer val0(Double val) {
+	protected Integer val00(Double val) {
 		if(val<0.2) return 1;
 		if(val<0.4) return 2;
 		if(val<0.6) return 3;
@@ -24,28 +24,28 @@ public class YeastFilter extends AbstractFilter<Integer, Integer, Double>{
 	}
 
 	@Override
-	protected Integer val1(Double val) {
-		return val0(val);
+	protected Integer val01(Double val) {
+		return val00(val);
 	}
 
 
 	@Override
-	protected Integer val2(Double val) {
-		return val0(val) -1;
+	protected Integer val02(Double val) {
+		return val00(val) -1;
 	}
 
 	@Override
-	protected Integer val3(Double val) {
-		return val0(val);
+	protected Integer val03(Double val) {
+		return val00(val);
 	}
 
 	@Override
-	protected Integer val4(Double val) {
-		return val0(val);
+	protected Integer val04(Double val) {
+		return val00(val);
 	}
 
 	@Override
-	protected Integer val5(Double val) {
+	protected Integer val05(Double val) {
 		if(val<0.005) return 1;
 		if(val<0.01) return 2;
 		if(val<0.2) return 3;
@@ -55,12 +55,12 @@ public class YeastFilter extends AbstractFilter<Integer, Integer, Double>{
 	}
 
 	@Override
-	protected Integer val6(Double val) {
-		return val0(val);
+	protected Integer val06(Double val) {
+		return val00(val);
 	}
 
 	@Override
-	protected Integer val7(Double val) {
+	protected Integer val07(Double val) {
 		if(val<0.1) return 1;
 		if(val<0.2) return 2;
 		if(val<0.3) return 3;
@@ -70,13 +70,13 @@ public class YeastFilter extends AbstractFilter<Integer, Integer, Double>{
 	}
 
 	@Override
-	protected Integer val8(Double val) {
+	protected Integer val08(Double val) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	protected Integer val9(Double val) {
+	protected Integer val09(Double val) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -113,6 +113,24 @@ public class YeastFilter extends AbstractFilter<Integer, Integer, Double>{
 	
 	@Override
 	protected Integer val14(Double val) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Integer val15(Double val) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Integer val16(Double val) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Integer val17(Double val) {
 		// TODO Auto-generated method stub
 		return null;
 	}

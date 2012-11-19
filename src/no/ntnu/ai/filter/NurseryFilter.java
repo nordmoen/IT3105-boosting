@@ -1,16 +1,8 @@
-package no.ntnu.ai.classifiers.dtc.test;
+package no.ntnu.ai.filter;
 
 import java.util.List;
 
-import no.ntnu.ai.filter.AbstractFilter;
-
-public class TestFilter extends AbstractFilter<Integer, Integer, Integer> {
-
-	@Override
-	public void initialize(List<String> options) {
-		// TODO Auto-generated method stub
-		
-	}
+public class NurseryFilter extends AbstractFilter<Integer, Integer, Integer> {
 
 	@Override
 	protected Integer convertClassification(String classif) {
@@ -39,32 +31,27 @@ public class TestFilter extends AbstractFilter<Integer, Integer, Integer> {
 
 	@Override
 	protected Integer val03(Integer val) {
-		// TODO Auto-generated method stub
-		return null;
+		return val;
 	}
 
 	@Override
 	protected Integer val04(Integer val) {
-		// TODO Auto-generated method stub
-		return null;
+		return val;
 	}
 
 	@Override
 	protected Integer val05(Integer val) {
-		// TODO Auto-generated method stub
-		return null;
+		return val;
 	}
 
 	@Override
 	protected Integer val06(Integer val) {
-		// TODO Auto-generated method stub
-		return null;
+		return val;
 	}
 
 	@Override
 	protected Integer val07(Integer val) {
-		// TODO Auto-generated method stub
-		return null;
+		return val;
 	}
 
 	@Override
@@ -125,6 +112,12 @@ public class TestFilter extends AbstractFilter<Integer, Integer, Integer> {
 	protected Integer val17(Integer val) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void initialize(List<String> options) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

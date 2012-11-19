@@ -48,25 +48,25 @@ public abstract class AbstractFilter<T, T2, T3> implements Filter<T, T2>{
 		T3 val = convertValue(val2);
 		switch (index) {
 		case 0:
-			return val0(val);
+			return val00(val);
 		case 1:
-			return val1(val);
+			return val01(val);
 		case 2:
-			return val2(val);
+			return val02(val);
 		case 3:
-			return val3(val);
+			return val03(val);
 		case 4:
-			return val4(val);
+			return val04(val);
 		case 5:
-			return val5(val);
+			return val05(val);
 		case 6:
-			return val6(val);
+			return val06(val);
 		case 7:
-			return val7(val);
+			return val07(val);
 		case 8:
-			return val8(val);
+			return val08(val);
 		case 9:
-			return val9(val);
+			return val09(val);
 		case 10:
 			return val10(val);
 		case 11:
@@ -77,26 +77,36 @@ public abstract class AbstractFilter<T, T2, T3> implements Filter<T, T2>{
 			return val13(val);
 		case 14:
 			return val14(val);
+		case 15:
+			return val15(val);
+		case 16:
+			return val16(val);
+		case 17:
+			return val17(val);
 		default:
 			return null;
 		}
 	}
 	
-	protected abstract T val0(T3 val);
-	protected abstract T val1(T3 val);
-	protected abstract T val2(T3 val);
-	protected abstract T val3(T3 val);
-	protected abstract T val4(T3 val);
-	protected abstract T val5(T3 val);
-	protected abstract T val6(T3 val);
-	protected abstract T val7(T3 val);
-	protected abstract T val8(T3 val);
-	protected abstract T val9(T3 val);
+	
+	protected abstract T val00(T3 val);
+	protected abstract T val01(T3 val);
+	protected abstract T val02(T3 val);
+	protected abstract T val03(T3 val);
+	protected abstract T val04(T3 val);
+	protected abstract T val05(T3 val);
+	protected abstract T val06(T3 val);
+	protected abstract T val07(T3 val);
+	protected abstract T val08(T3 val);
+	protected abstract T val09(T3 val);
 	protected abstract T val10(T3 val);
 	protected abstract T val11(T3 val);
 	protected abstract T val12(T3 val);
 	protected abstract T val13(T3 val);
 	protected abstract T val14(T3 val);
+	protected abstract T val15(T3 val);
+	protected abstract T val16(T3 val);
+	protected abstract T val17(T3 val);
 
 
 

@@ -1,16 +1,8 @@
-package no.ntnu.ai.classifiers.dtc.test;
+package no.ntnu.ai.filter;
 
 import java.util.List;
 
-import no.ntnu.ai.filter.AbstractFilter;
-
-public class TestFilter extends AbstractFilter<Integer, Integer, Integer> {
-
-	@Override
-	public void initialize(List<String> options) {
-		// TODO Auto-generated method stub
-		
-	}
+public class PenDigitsFilter extends AbstractFilter<Integer, Integer, Integer> {
 
 	@Override
 	protected Integer convertClassification(String classif) {
@@ -24,95 +16,91 @@ public class TestFilter extends AbstractFilter<Integer, Integer, Integer> {
 
 	@Override
 	protected Integer val00(Integer val) {
-		return val;
+		if(val<10) return 1;
+		if(val<20) return 2;
+		if(val<30) return 3;
+		if(val<40) return 4;
+		if(val<50) return 5;
+		if(val<60) return 6;
+		if(val<70) return 7;
+		if(val<80) return 8;
+		if(val<90) return 9;
+		return 10;
 	}
 
 	@Override
 	protected Integer val01(Integer val) {
-		return val;
+		return val00(val);
 	}
 
 	@Override
 	protected Integer val02(Integer val) {
-		return val;
+		return val00(val);
 	}
 
 	@Override
 	protected Integer val03(Integer val) {
-		// TODO Auto-generated method stub
-		return null;
+		return val00(val);
 	}
 
 	@Override
 	protected Integer val04(Integer val) {
-		// TODO Auto-generated method stub
-		return null;
+		return val00(val);
 	}
 
 	@Override
 	protected Integer val05(Integer val) {
-		// TODO Auto-generated method stub
-		return null;
+		return val00(val);
 	}
 
 	@Override
 	protected Integer val06(Integer val) {
-		// TODO Auto-generated method stub
-		return null;
+		return val00(val);
 	}
 
 	@Override
 	protected Integer val07(Integer val) {
-		// TODO Auto-generated method stub
-		return null;
+		return val00(val);
 	}
 
 	@Override
 	protected Integer val08(Integer val) {
-		// TODO Auto-generated method stub
-		return null;
+		return val00(val);
 	}
 
 	@Override
 	protected Integer val09(Integer val) {
-		// TODO Auto-generated method stub
-		return null;
+		return val00(val);
 	}
 
 	@Override
 	protected Integer val10(Integer val) {
-		// TODO Auto-generated method stub
-		return null;
+		return val00(val);
 	}
 
 	@Override
 	protected Integer val11(Integer val) {
-		// TODO Auto-generated method stub
-		return null;
+		return val00(val);
 	}
 
 	@Override
 	protected Integer val12(Integer val) {
-		// TODO Auto-generated method stub
-		return null;
+		return val00(val);
 	}
 
 	@Override
 	protected Integer val13(Integer val) {
-		// TODO Auto-generated method stub
-		return null;
+		return val00(val);
 	}
 
 	@Override
 	protected Integer val14(Integer val) {
-		// TODO Auto-generated method stub
-		return null;
+		return val00(val);
 	}
 
 	@Override
 	protected Integer val15(Integer val) {
-		// TODO Auto-generated method stub
-		return null;
+		return val00(val);
 	}
 
 	@Override
@@ -125,6 +113,12 @@ public class TestFilter extends AbstractFilter<Integer, Integer, Integer> {
 	protected Integer val17(Integer val) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void initialize(List<String> options) {
+		// TODO Auto-generated method stub
+
 	}
 
 }
