@@ -18,6 +18,7 @@ public class AdaBoost<T, T2> {
 	private final Map<String, List<Double>> errorMap;
 	private boolean hasRun = false;
 	private final double diffClasses;
+	private int numJiggles = 0;
 
 	public AdaBoost(List<Generator<T, T2>> generators, List<DataElement<T, T2>> data){
 		this.generators = generators;
@@ -48,6 +49,7 @@ public class AdaBoost<T, T2> {
 			}
 		}
 		hasRun = true;
+		System.out.println("Number of jiggles required: " + this.numJiggles);
 		return hypotheses;
 	}
 
@@ -106,6 +108,7 @@ public class AdaBoost<T, T2> {
 	}
 
 	private void jiggleWeights(double beta){
+		this.numJiggles++;
 		double nBeta = 1/Math.pow(this.data.size(), beta);
 		double random = Math.random()*(2*nBeta) - nBeta;
 		for(int i = 0; i < this.weights.size(); i++){
