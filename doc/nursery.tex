@@ -1,0 +1,37 @@
+\subsection{Nursery Dataset}\label{nursery dataset}
+This dataset represents the classification of applications for a nursery school.
+
+To run, use these options with the classifier options wanted.
+
+\begin{lstlisting}[label=lst:nursery, caption=Nursery dataset general options]
+--global 0.2 42 --file nursery.txt --filter no.ntnu.ai.filter.NurseryFilter
+\end{lstlisting}
+
+\begin{landscape}
+\begin{table}
+\begin{tabular}{|c|c|c||c|c|c||c||p{5cm}|}
+\hline
+NBC \# & Training Error & Standard Deviation & DTC \# & Training Error
+& Standard Deviation & Test Error & Classifier option \\ \hline
+1 & 0.097 & N/A & 0 & N/A & N/A & 255/2592(9\%) & NBCGenerator 1 \\ \hline
+0 & N/A & N/A & 1 & 0.0 & N/A & 76/2592(2\%) & DTCGenerator 1 \\ \hline
+5 & 0.234 & 0.117 & 0 & N/A & N/A & 249/2592(9\%) & NBCGenerator 5 \\ \hline
+10 & 0.193 & 0.094 & 0 & N/A & N/A & 249/2592(9\%) & NBCGenerator 10 \\ \hline
+20 & 0.161 & 0.094 & 0 & N/A & N/A & 249/2592(9\%) & NBCGenerator 20 \\ \hline
+0 & N/A & N/A & 5 & 0.0 & 0.0 & 76/2592(2\%) & DTCGenerator 5 \\ \hline
+0 & N/A & N/A & 10 & 0.381 & 0.066 & 847/2592(32\%) & DTCGenerator 10 1 \\ \hline
+0 & N/A & N/A & 10 & 0.358 & 0.081 & 451/2592(17\%) & DTCGenerator 10 2 \\ \hline
+0 & N/A & N/A & 10 & 0.0 & 0.0 & 76/2592(2\%) & DTCGenerator 10 \\ \hline
+0 & N/A & N/A & 20 & 0.0 & 0.0 & 76/2592(2\%) & DTCGenerator 20 \\ \hline
+5 & 0.229 & 0.075 & 5 & 0.380 & 0.077 & 291/2592(11\%) & DTCGenerator 5 2, 
+\newline NBCGenerator 5 \\ \hline
+10 & 0.194 & 0.075 & 10 & 0.349 & 0.079 & 313/2592(12\%) & DTCGenerator 10 2, 
+\newline NBCGenerator 10 \\ \hline
+20 & 0.269 & 0.037 & 20 & 0.347 & 0.085 & 338/2592(13\%) & DTCGenerator 20 2, 
+\newline NBCGenerator 20 \\ \hline
+\hline
+\end{tabular}
+\label{tab:nursery}
+\caption{Table showing the results of our classifiers on the Nursery dataset}
+\end{table}
+\end{landscape}
