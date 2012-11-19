@@ -1,0 +1,25 @@
+\section{Implementation}\label{implementation}
+In this section we will talk a bit about our implementation. We will describe
+how it manages to classify new instances, how we generate new classifiers and
+how it can be extended without changing any implementation.
+
+From our \adaboost{} implementations view all we generate are Hypothesis\footnote{
+no.ntnu.ai.hypothesis.Hypothesis} which comes from Generators\footnote{
+no.ntnu.ai.hypothesis.Generator}. These interfaces dictates what all new
+classifiers must support. A Generator creates a new Hypothesis with the basis
+in weights and the training set. An Hypothesis only needs to support setting
+its weight and classifying a new instance\footnote{We have created an abstract
+class for convenience, situated in no.ntnu.ai.classifiers.Classifier}.
+
+From an Hypothesis point of view all data is of type DataElement\footnote{
+no.ntnu.ai.data.DataElement} which contains a number of attributes specified when
+it's created. It also contains a classification which it must be able to produce.
+DataElement uses Java generics to support different types of attributes and 
+classifications which is determined by the filter used. Each Generator must
+support the same attributes and classifications as the DataElement used, but
+this is only checked at runtime.
+
+Our data flow starts with reading all lines in a file creating DataElements
+with String values. Then we apply a filter which must implement the interface
+Filter\footnote{no.ntnu.ai.filter.Filter}. After that is done we shuffle the
+dataset using a specified random seed to be able to replicate our tests.

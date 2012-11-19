@@ -19,7 +19,7 @@ public class AdaBoost<T, T2> {
 	private boolean hasRun = false;
 	private final double diffClasses;
 
-	public AdaBoost(List<Generator<T, T2>> generators, List<DataElement<T, T2>> data){
+	public AdaBoost(List<Generator<T, T2>> generators, List<DataElement<T, T2>> data, long seed){
 		this.generators = generators;
 		this.data = data;
 		weights = new HashMap<Integer, Double>();
