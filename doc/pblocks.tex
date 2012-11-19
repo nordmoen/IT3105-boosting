@@ -1,0 +1,40 @@
+\subsection{Page-blocks Dataset}\label{pblocks}
+
+
+To run, use these options with the classifier options wanted.
+
+\begin{lstlisting}[label=lst:pblocks, caption=Page-blocks dataset general 
+options]
+--global 0.2 42 --file page-blocks.txt --filter 
+no.ntnu.ai.filter.PageBlocksFilter
+\end{lstlisting}
+
+\begin{landscape}
+\begin{table}
+\begin{tabular}{|c|c|c||c|c|c||c||p{5cm}|}
+\hline
+NBC \# & Training Error & Standard Deviation & DTC \# & Training Error
+& Standard Deviation & Test Error & Classifier option \\ \hline
+1 & 0.071 & N/A & 0 & N/A & N/A & 76/1095(6\%) & NBCGenerator 1 \\ \hline
+0 & N/A & N/A & 1 & 0.011 & N/A & 47/1095(4\%) & DTCGenerator 1 \\ \hline
+5 & 0.158 & 0.088 & 0 & N/A & N/A & 62/1095(5\%) & NBCGenerator 5 \\ \hline
+10 & 0.134 & 0.075 & 0 & N/A & N/A & 67/1095(6\%) & NBCGenerator 10 \\ \hline
+20 & 0.110 & 0.058 & 0 & N/A & N/A & 65/1095(5\%) & NBCGenerator 20 \\ \hline
+0 & N/A & N/A & 5 & 0.020 & 0.010 & 50/1095(4\%) & DTCGenerator 5 \\ \hline
+0 & N/A & N/A & 10 & 0.598 & 0.263 & 75/1095(6\%) & DTCGenerator 10 1 \\ \hline
+0 & N/A & N/A & 10 & 0.485 & 0.200 & 61/1095(5\%) & DTCGenerator 10 2 \\ \hline
+0 & N/A & N/A & 10 & 0.021 & 0.008 & 47/1095(4\%) & DTCGenerator 10 \\ \hline
+0 & N/A & N/A & 20 & 0.021 & 0.006 & 50/1095(4\%) & DTCGenerator 20 \\ \hline
+5 & 0.111 & 0.023 & 5 & 0.533 & 0.234 & 66/1095(6\%) & DTCGenerator 5 2, 
+\newline NBCGenerator 5 \\ \hline
+10 & 0.095 & 0.007 & 10 & 0.596 & 0.267 & 56/1095(5\%) & DTCGenerator 10 2, 
+\newline NBCGenerator 10 \\ \hline
+20 & 0.100 & 0.004 & 20 & 0.678 & 0.179 & 53/1095(4\%) & DTCGenerator 20 2, 
+\newline NBCGenerator 20 \\ \hline
+\hline
+\end{tabular}
+\label{tab:pblocks}
+\caption{Table showing the results of our classifiers on the Page-blocks 
+dataset}
+\end{table}
+\end{landscape}

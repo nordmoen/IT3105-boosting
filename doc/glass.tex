@@ -7,9 +7,6 @@ To run, use these options with the classifier options wanted.
 --global 0.2 42 --file glass.txt --filter no.ntnu.ai.filter.GlassFilter
 \end{lstlisting}
 
-The classifier options below does not conform to our actual command-line style
-which is down to space requirement. To use just add the sentence '
---classifier no.ntnu.ai[nbc|dtc].' in front.
 
 \begin{landscape}
 \begin{table}
@@ -17,22 +14,22 @@ which is down to space requirement. To use just add the sentence '
 \hline
 NBC \# & Training Error & Standard Deviation & DTC \# & Training Error
 & Standard Deviation & Test Error & Classifier option \\ \hline
-1 & 0.339 & 0.0 & 0 & 0 & 0 & 18/43(41\%) & NBCGenerator 1 \\ \hline
-0 & 0 & 0 & 1 & 0.181 & 0.0 & 17/43(39\%) & DTCGenerator 1 \\ \hline
-5 & 0.391 & 0.045 & 0 & 0 & 0 & 19/43(44\%) & NBCGenerator 5 \\ \hline
-10 & 0.371 & 0.042 & 0 & 0 & 0 & 19/43(44\%) & NBCGenerator 10 \\ \hline
-20 & 0.358 & 0.034 & 0 & 0 & 0 & 20/43(46\%) & NBCGenerator 20 \\ \hline
-0 & 0 & 0 & 5 & 0.256 & 0.043 & 18/43(41\%) & DTCGenerator 5 \\ \hline
-0 & 0 & 0 & 10 & 0.673 & 0.133 & 23/43(53\%) & DTCGenerator 10 1 \\ \hline
-0 & 0 & 0 & 10 & 0.623 & 0.124 & 24/43(55\%) & DTCGenerator 10 2 \\ \hline
-0 & 0 & 0 & 10 & 0.265 & 0.047 & 18/43(41\%) & DTCGenerator 10 \\ \hline
-0 & 0 & 0 & 20 & 0.268 & 0.042 & 19/43(44\%) & DTCGenerator 20 \\ \hline
+1 & 0.339 & N/A & 0 & N/A & N/A & 18/43(41\%) & NBCGenerator 1 \\ \hline
+0 & N/A & N/A & 1 & 0.181 & N/A & 17/43(39\%) & DTCGenerator 1 \\ \hline
+5 & 0.391 & 0.045 & 0 & N/A & N/A & 19/43(44\%) & NBCGenerator 5 \\ \hline
+10 & 0.371 & 0.042 & 0 & N/A & N/A & 19/43(44\%) & NBCGenerator 10 \\ \hline
+20 & 0.358 & 0.034 & 0 & N/A & N/A & 20/43(46\%) & NBCGenerator 20 \\ \hline
+0 & N/A & N/A & 5 & 0.256 & 0.043 & 18/43(41\%) & DTCGenerator 5 \\ \hline
+0 & N/A & N/A & 10 & 0.673 & 0.133 & 23/43(53\%) & DTCGenerator 10 1 \\ \hline
+0 & N/A & N/A & 10 & 0.623 & 0.124 & 24/43(55\%) & DTCGenerator 10 2 \\ \hline
+0 & N/A & N/A & 10 & 0.265 & 0.047 & 18/43(41\%) & DTCGenerator 10 \\ \hline
+0 & N/A & N/A & 20 & 0.268 & 0.042 & 19/43(44\%) & DTCGenerator 20 \\ \hline
 5 & 0.430 & 0.046 & 5 & 0.651 & 0.095 & 21/43(48\%) & DTCGenerator 5 2, 
-NBCGenerator 5 \\ \hline
+\newline NBCGenerator 5 \\ \hline
 10 & 0.391 & 0.044 & 10 & 0.646 & 0.105 & 17/43(39\%) & DTCGenerator 10 2, 
-NBCGenerator 10 \\ \hline
+\newline NBCGenerator 10 \\ \hline
 20 & 0.409 & 0.045 & 20 & 0.661 & 0.093 & 22/43(51\%) & DTCGenerator 20 2, 
-NBCGenerator 20 \\ \hline
+\newline NBCGenerator 20 \\ \hline
 \hline
 \end{tabular}
 \label{tab:glass}

@@ -1,4 +1,3 @@
-Error is 0
 --global 0.2 42 --file training_sets/nursery.txt --filter no.ntnu.ai.filter.NurseryFilter --classifier no.ntnu.ai.classifiers.nbc.NBCGenerator 1
 Number of jiggles required: 0
 no.ntnu.ai.classifiers.nbc.NBClassifier(1):
@@ -35,11 +34,6 @@ no.ntnu.ai.classifiers.nbc.NBClassifier(20):
 Test error: 249 of 2592 (9%), Correct classified: 2343 of 2592 (91%)
 -----------------------------------------------------------------
 --global 0.2 42 --file training_sets/nursery.txt --filter no.ntnu.ai.filter.NurseryFilter --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 5
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
 Number of jiggles required: 5
 no.ntnu.ai.classifiers.dtc.Node(5):
 	Training avg error: 0.0, std dev of error: 0.0
@@ -61,16 +55,6 @@ no.ntnu.ai.classifiers.dtc.Node(10):
 Test error: 451 of 2592 (17%), Correct classified: 2141 of 2592 (83%)
 -----------------------------------------------------------------
 --global 0.2 42 --file training_sets/nursery.txt --filter no.ntnu.ai.filter.NurseryFilter --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 10
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
 Number of jiggles required: 10
 no.ntnu.ai.classifiers.dtc.Node(10):
 	Training avg error: 0.0, std dev of error: 0.0
@@ -78,26 +62,6 @@ no.ntnu.ai.classifiers.dtc.Node(10):
 Test error: 76 of 2592 (2%), Correct classified: 2516 of 2592 (98%)
 -----------------------------------------------------------------
 --global 0.2 42 --file training_sets/nursery.txt --filter no.ntnu.ai.filter.NurseryFilter --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 20
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
 Number of jiggles required: 20
 no.ntnu.ai.classifiers.dtc.Node(20):
 	Training avg error: 0.0, std dev of error: 0.0

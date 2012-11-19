@@ -13,7 +13,6 @@ no.ntnu.ai.classifiers.dtc.Node(1):
 Test error: 252 of 2199 (11%), Correct classified: 1947 of 2199 (89%)
 -----------------------------------------------------------------
 --global 0.2 42 --file training_sets/pen-digits.txt --filter no.ntnu.ai.filter.PenDigitsFilter --classifier no.ntnu.ai.classifiers.nbc.NBCGenerator 5
-Error is 0
 Number of jiggles required: 0
 no.ntnu.ai.classifiers.nbc.NBClassifier(5):
 	Training avg error: 0.3137268281587627, std dev of error: 0.10596991396654201
@@ -35,11 +34,6 @@ no.ntnu.ai.classifiers.nbc.NBClassifier(20):
 Test error: 230 of 2199 (10%), Correct classified: 1969 of 2199 (90%)
 -----------------------------------------------------------------
 --global 0.2 42 --file training_sets/pen-digits.txt --filter no.ntnu.ai.filter.PenDigitsFilter --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 5
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
 Number of jiggles required: 5
 no.ntnu.ai.classifiers.dtc.Node(5):
 	Training avg error: 0.0, std dev of error: 0.0
@@ -61,16 +55,6 @@ no.ntnu.ai.classifiers.dtc.Node(10):
 Test error: 398 of 2199 (18%), Correct classified: 1801 of 2199 (82%)
 -----------------------------------------------------------------
 --global 0.2 42 --file training_sets/pen-digits.txt --filter no.ntnu.ai.filter.PenDigitsFilter --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 10
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
 Number of jiggles required: 10
 no.ntnu.ai.classifiers.dtc.Node(10):
 	Training avg error: 0.0, std dev of error: 0.0
@@ -78,27 +62,7 @@ no.ntnu.ai.classifiers.dtc.Node(10):
 Test error: 252 of 2199 (11%), Correct classified: 1947 of 2199 (89%)
 -----------------------------------------------------------------
 --global 0.2 42 --file training_sets/pen-digits.txt --filter no.ntnu.ai.filter.PenDigitsFilter --classifier no.ntnu.ai.classifiers.dtc.DTCGenerator 20
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0
-Error is 0Number of jiggles required: 20
-
+Number of jiggles required: 20
 no.ntnu.ai.classifiers.dtc.Node(20):
 	Training avg error: 0.0, std dev of error: 0.0
 

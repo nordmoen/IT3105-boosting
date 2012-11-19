@@ -1,0 +1,41 @@
+\subsection{Yeast Dataset}\label{yeast}
+
+
+To run, use these options with the classifier options wanted.
+
+\begin{lstlisting}[label=lst:yeast, caption=Yeast dataset general 
+options]
+--global 0.2 42 --file yeast.txt --filter no.ntnu.ai.filter.YeastFilter
+\end{lstlisting}
+
+\begin{landscape}
+\begin{table}
+\begin{tabular}{|c|c|c||c|c|c||c||p{5cm}|}
+\hline
+NBC \# & Training Error & Standard Deviation & DTC \# & Training Error
+& Standard Deviation & Test Error & Classifier option \\ \hline
+1 & 0.414 & N/A & 0 & N/A & N/A & 132/297(44\%) & NBCGenerator 1 \\ \hline
+0 & N/A & N/A & 1 & 0.347 & N/A & 152/297(51\%) & DTCGenerator 1 \\ \hline
+5 & 0.585 & 0.089 & 0 & N/A & N/A & 150/297(50\%) & NBCGenerator 5 \\ \hline
+10 & 0.576 & 0.064 & 0 & N/A & N/A & 148/297(49\%) & NBCGenerator 10 \\ \hline
+20 & 0.556 & 0.051 & 0 & N/A & N/A & 152/297(51\%) & NBCGenerator 20 \\ \hline
+0 & N/A & N/A & 5 & 0.506 & 0.088 & 156/297(48\%) & DTCGenerator 5 \\ \hline
+0 & N/A & N/A & 10 & 0.796 & 0.127 & 187/297(62\%) & DTCGenerator 10 1 \\ 
+\hline
+0 & N/A & N/A & 10 & 0.763 & 0.122 & 164/297(55\%) & DTCGenerator 10 2 \\ 
+\hline
+0 & N/A & N/A & 10 & 0.535 & 0.076 & 145/297(48\%) & DTCGenerator 10 \\ \hline
+0 & N/A & N/A & 20 & 0.544 & 0.059 & 146/297(49\%) & DTCGenerator 20 \\ \hline
+5 & 0.584 & 0.088 & 5 & 0.796 & 0.080 & 141/297(47\%) & DTCGenerator 5 2, 
+\newline NBCGenerator 5 \\ \hline
+10 & 0.600 & 0.055 & 10 & 0.788 & 0.126 & 141/297(47\%) & DTCGenerator 10 2, 
+\newline NBCGenerator 10 \\ \hline
+20 & 0.598 & 0.051 & 20 & 0.833 & 0.094 & 164/297(55\%) & DTCGenerator 20 2, 
+\newline NBCGenerator 20 \\ \hline
+\hline
+\end{tabular}
+\label{tab:pblocks}
+\caption{Table showing the results of our classifiers on the Page-blocks 
+dataset}
+\end{table}
+\end{landscape}
