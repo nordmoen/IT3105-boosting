@@ -132,7 +132,7 @@ public class UserInterface {
 
 			Collections.shuffle(classifierGenerators, new Random(randomValue));
 			List<Hypothesis> hypotheses = new ArrayList();
-			AdaBoost<?, ?> boost = new AdaBoost(classifierGenerators, training);
+			AdaBoost<?, ?> boost = new AdaBoost(classifierGenerators, training, randomValue);
 			List<?> hypos = boost.runBooster();
 			hypotheses.addAll((Collection<? extends Hypothesis>) hypos);
 			

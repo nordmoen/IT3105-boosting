@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 import no.ntnu.ai.data.DataElement;
@@ -17,11 +18,13 @@ public class AdaBoost<T, T2> {
 	private final Map<Integer, Double> weights;
 	private final Map<String, List<Double>> errorMap;
 	private boolean hasRun = false;
+	private final Random rand;
 	private final double diffClasses;
 	private int numJiggles = 0;
 
 	public AdaBoost(List<Generator<T, T2>> generators, List<DataElement<T, T2>> data, long seed){
 		this.generators = generators;
+		this.rand = new Random(seed);
 		this.data = data;
 		weights = new HashMap<Integer, Double>();
 		for(int i = 0; i < data.size(); i++){
@@ -110,7 +113,7 @@ public class AdaBoost<T, T2> {
 	private void jiggleWeights(double beta){
 		this.numJiggles++;
 		double nBeta = 1/Math.pow(this.data.size(), beta);
-		double random = Math.random()*(2*nBeta) - nBeta;
+		double random = this.rand.nextDouble()*(2*nBeta) - nBeta;
 		for(int i = 0; i < this.weights.size(); i++){
 			this.weights.put(i, Math.max(0, this.weights.get(i) + random));
 		}
