@@ -1,0 +1,11 @@
+\section{Discussion}\label{discussion}
+One important thing we found when examining the results were that the datasets 
+are very important for the effect the boosting algorithm has. If a dataset has 
+a low number of instances and/or a very heavily skewed proportion of 
+instance-classes boosting, at least using our implementation of Naive Bayesian 
+and Decision Tree Classifiers is not very effective.
+Another important factor for the effect of boosting is the depth of the 
+decision trees the DTC is allowed to construct, if these are deep enough to 
+allow a dataset to be split on all of its attributes it will construct 
+over-fitted trees that only have a marginal improvement from boosting in the 
+cases were the data is ambiguous or unknown.
