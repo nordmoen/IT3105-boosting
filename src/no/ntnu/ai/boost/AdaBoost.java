@@ -63,10 +63,10 @@ public class AdaBoost<T, T2> {
 				avgError++;
 			}
 		}
-		if(error > (this.diffClasses -1) / this.diffClasses){
+		if(error >= (this.diffClasses -1) / this.diffClasses){
 			this.jiggleWeights(beta);
 			return false;
-		}else if(0 < error && error < (this.diffClasses - 1)/this.diffClasses){
+		}else if(0 < error){
 			for(int i = 0; i < this.weights.size(); i++){
 				DataElement<T, T2> d = data.get(i);
 				if(!h.classify(d).equals(d.getClassification())){
