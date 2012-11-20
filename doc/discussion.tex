@@ -3,9 +3,36 @@ One important thing we found when examining the results were that the datasets
 are very important for the effect the boosting algorithm has. If a dataset has 
 a low number of instances and/or a very heavily skewed proportion of 
 instance-classes boosting, at least using our implementation of Naive Bayesian 
-and Decision Tree Classifiers is not very effective.
+and Decision Tree Classifiers, is not very effective.
+
 Another important factor for the effect of boosting is the depth of the 
 decision trees the DTC is allowed to construct, if these are deep enough to 
 allow a dataset to be split on all of its attributes it will construct 
 over-fitted trees that only have a marginal improvement from boosting in the 
 cases were the data is ambiguous or unknown.
+
+One of the problems that we encountered when using boosting is that the weight
+of a classifier would not reflect what it could actually explain. With this we
+mean that a first classifier might get quite a lot correct and therefor get
+a high weight, the next classifier will then only care about the instances that
+the previous classifier got wrong and won't care about the rest. This might mean that
+the second classifier were able to answer all the instances the first got wrong,
+but miss classify the rest and thus get a low weight. This would manifest it self
+when we try to classify the test set, the first classifier would suggest a wrong
+answer, but because it has a high weight it will win over the second. Even though
+that test instance might be one of the instances the first had gotten wrong.
+
+This
+seemed to be a problem for a couple of the other groups and one suggestion was to
+partition the training set randomly using the weights, possibly with Fitness
+proportionate selection\footnote{\url{
+https://en.wikipedia.org/wiki/Roulette_wheel_selection}}. When generating a new
+classifier the classifier would only see a subset of the actual training set, but
+the weight of the classifier would not be effected by the set of training instances
+which it did not see. This could mean that the classifiers would only get a weight
+proportional to the actual explanation strength of that classifier. The intuition
+behind this goes back to our description above, the first classifier might get a
+lot correct, but when the second classifier tries to specialize on the instances
+that the first got wrong it should not be punished for this. Unfortunately
+we did not have time to try and implement this, but it could possibly solve some
+of the problems that we experienced during boosting.
