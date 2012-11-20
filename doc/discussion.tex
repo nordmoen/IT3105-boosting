@@ -35,4 +35,37 @@ behind this goes back to our description above, the first classifier might get a
 lot correct, but when the second classifier tries to specialize on the instances
 that the first got wrong it should not be punished for this. Unfortunately
 we did not have time to try and implement this, but it could possibly solve some
-of the problems that we experienced during boosting.
+of the problems that we experienced during boosting. There are however some
+possible problems with this approach. For one thing giving each classifier only
+a subset of the training data might mean that we would get very over fitted
+classifiers which would go against what \adaboost{} tries to accomplish. Another
+problem is the weighting, if we just gave each classifier a subset of the
+training set, but kept the current way to give classifiers weight almost all
+classifiers would get a much larger weight which would again give us a problem
+during testing. This would most likely mean that a highly specialized classifier
+would get a high weight, but this would also mean that it could "vote" for
+solutions even though the current instance is outside the classifiers
+specialization.
+
+One observation that we can make is that for the naive Bayes classifier we can
+see that the more classifiers we have the less is the standard deviation. This
+is fully to be expected as we just have more classifiers which generally manages
+to classify more of the cases and works towards the average.
+
+One of the harder parts about this project was seeing if the booster worked even
+though the results did not improve dramatically. We have checked several things,
+but we are quite certain that our implementation is not very wrong. We might
+have overlooked somethings, but the major part of the project should be
+intelligent designed. One problem that we have observed is that we have a hard
+time creating different trees in the DTC. This can easily be observed for some
+of the datasets where even with five or ten classifiers we got the same average
+with no deviation. The reason behind this is quite complex, since we do take
+weights into account when creating the decision trees it should be effected, but
+when the dataset has little deviation the trees are forced into this
+configuration. If we grow the trees shallower we can see that the trees are
+different which does lend some credence to our code. The problem though does
+mean that boosting is affected because all the trees will "vote" for the same
+thing overshadowing the other classifiers and skewing the results. This
+observation also strengthen the theory that the dataset has a large involvement
+in the outcome of our booster.
+

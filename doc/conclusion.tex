@@ -1,0 +1,9 @@
+\section{Conclusion}\label{conclusion}
+As we stated what seems to be the biggest problem with our \adaboost{}
+algorithm seems to be the problem that several classifiers "vote" in cases where
+they should not, but because that classifier is good in the general case it will
+over turn the "vote" of a classifier that is specialized. The problem could be
+due to several different things, it might be the way weights are calculated, it
+might be the way classifiers are given a weight and it might be down to the fact
+that all classifiers see all training instances even though they should
+specialize.

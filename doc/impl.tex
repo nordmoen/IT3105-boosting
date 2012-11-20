@@ -40,7 +40,7 @@ Each Generator class uses its own logic to create a classifier of the correct ty
 based on the given data. This means that \adaboost{} does not know nor care what
 a Generator creates as long as it implements the Hypothesis interface. This also
 means that our implementation is very general. When creating a new classifier type
-one has to implement a new Generator and a new Hypothesis class, which is all. To
+one has to implement a new Generator and a new Hypothesis class, that is all. To
 support new datasets one only has to implement a new filter to convert from String
 to a specific type. This was done to decouple the datasets from the classifiers, but
 it also means that we have to implement less code since each classifier shares the
