@@ -36,3 +36,15 @@ NBC \# & Training Error & Standard Deviation & DTC \# & Training Error
 classifiers on the Nursery dataset}
 \end{table}
 \end{landscape}
+
+This dataset seems to lend itself well to classification, but again we can see
+that this does not help our boosting algorithm. We can see that this dataset
+have a small set of possibilities as the decision tree classifier which can go
+to maximum depth get the best result. We can see that the naive Bayes classifier
+does quite well also, but boosting does very little to help to achieve a better
+result. We can see that boosting does have an effect on the result as we can see
+the third last does better than just ten decision trees with a depth of two, but
+it does worse than just ten naive Bayes, which tells us that the boosting does
+have an effect, but not quite positive. The problem we are seeing with the last
+tree rows in the table are most likely due to some of the problems that we
+discuss in the Discussion section(\ref{discussion}).

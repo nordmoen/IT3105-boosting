@@ -36,3 +36,13 @@ NBC \# & Training Error & Standard Deviation & DTC \# & Training Error
 classifiers on the Pen-digits dataset}
 \end{table}
 \end{landscape}
+
+This is one of the only datasets which we can see that boosting is actively
+helping the solution get better. As we can see the bottom three rows does
+somewhat better than each of the others individually. This can only come from
+the effect of boosting as neither the decision tree nor the naive Bayes does
+better individually than combined. However it does seem that the number of
+classifiers has little to say, but the combination of decision tree and naive
+Bayes is what makes this better. If we also look at only five, ten and twenty
+NBCs we can see that the result does get marginally better, but it's not enough
+to call it better for our booster.

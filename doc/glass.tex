@@ -37,3 +37,16 @@ NBC \# & Training Error & Standard Deviation & DTC \# & Training Error
 on the Glass dataset}
 \end{table}
 \end{landscape}
+
+This dataset was one of the harder ones given to us. The dataset was quite small
+which made it hard to create a good classifier and the dataset it self was hard
+to partition into buckets. From the description of the dataset at UCI we could
+see that not all of the attributes was as important, but this fact is not
+reflected in our classifiers. From the results above we can see that boosting
+had very little to do with the result and it seems that the point at which we
+split the dataset has the most significant importance. The variations between
+Generators with more classifiers can be explained by the number of times we had
+to throw away a classifier because it was to bad. This action introduces
+randomness\footnote{Which is seeded so any attempts to recreate should see the
+same result} which affected the results and explains why 20 classifiers for 
+NBC can come up with a different result than 10 classifiers.
